@@ -1,4 +1,8 @@
+"use client";
+
 export default function NewPost() {
+  
+
   return (
     <div className="bg-[#060309] text-[#f5b461]  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
       <div className="w-full">
@@ -6,18 +10,27 @@ export default function NewPost() {
           Post
         </h1>
         <form
-          action={""}
+          action={''}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
           <label className="text-2xl font-medium mb-1" htmlFor="image">
             Image
           </label>
-          <input
+          {/* <input
             name="file"
             className="cursor-pointer"
             type="file"
-            
+            accept="image/*"
+            onChange={handleImageChange}
           />
+          {preview && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={preview}
+              alt="preview"
+              className="w-full object-contain"
+            />
+          )} */}
           <label className="text-2xl font-medium mb-1" htmlFor="title">
             Title
           </label>
