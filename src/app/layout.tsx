@@ -39,7 +39,7 @@ export default function RootLayout({
       className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body
-        className={` antialiased min-h-full flex flex-col bg-black text-[#fbf8ff]`}
+        className={` antialiased min-h-full flex flex-col`}
       >
         <Navbar />
         {children}
