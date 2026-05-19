@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Creepster, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const creepster = Creepster({
   weight: "400",
@@ -38,11 +39,12 @@ export default function RootLayout({
       lang="en"
       className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body
-        className={` antialiased min-h-full flex flex-col`}
-      >
+      <body className={` antialiased min-h-full flex flex-col`}>
         <Navbar />
         {children}
+        <section className="flex justify-center py-10">
+          <Footer />
+        </section>
       </body>
     </html>
   );
