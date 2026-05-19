@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function Navbar() {
   const { user } = useAuth();
-  
 
   return (
     <header className="text-4xl w-full  shadow-sm bg-[#060309] text-[#f5b461]">
@@ -19,7 +18,7 @@ export default function Navbar() {
           <ul className=" space-x-8 ">
             <Link href={"/"}>HOME</Link>
             <Link href={"/about"}>ABOUT</Link>
-            {user &&  <Link href={"/dashboard"}>{user.username}</Link>}
+            {user && <Link href={"/dashboard"}>{user.username}</Link>}
           </ul>
         </nav>
         <Menu className="md:hidden" />
