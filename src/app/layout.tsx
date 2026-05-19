@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Creepster, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { AuthProvider } from "./context/auth-content";
 
 const creepster = Creepster({
   weight: "400",
@@ -40,11 +41,13 @@ export default function RootLayout({
       className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className={` antialiased min-h-full flex flex-col bg-black`}>
-        <Navbar />
-        {children}
-        <section className="flex justify-center py-10 bg-black">
-          <Footer />
-        </section>
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <section className="flex justify-center py-10 bg-black">
+            <Footer />
+          </section>
+        </AuthProvider>
       </body>
     </html>
   );
