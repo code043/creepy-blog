@@ -1,0 +1,66 @@
+export default function NewPost() {
+  return (
+    <div className="bg-[#060309] text-[#f5b461]  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
+      <div className="w-full">
+        <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
+          Post
+        </h1>
+        <form
+          action={""}
+          className="flex flex-col items-start space-y-4 mx-auto"
+        >
+          <label className="text-2xl font-medium mb-1" htmlFor="image">
+            Image
+          </label>
+          <input
+            name="file"
+            className="cursor-pointer"
+            type="file"
+            
+          />
+          <label className="text-2xl font-medium mb-1" htmlFor="title">
+            Title
+          </label>
+          <input
+            name="title"
+            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
+            type="text"
+            placeholder="Your title here..."
+          />
+          <label className="text-2xl font-medium mb-1" htmlFor="description">
+            Description
+          </label>
+          <input
+            name="description"
+            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
+            type="text"
+            placeholder="Your description here..."
+          />
+          <label className="text-2xl font-medium mb-1" htmlFor="content">
+            Content
+          </label>
+          <textarea
+            name="content"
+            className="w-full h-50 border rounded-md px-3 py-2 focus:outline-none focus:ring resize-none"
+            placeholder="Write something..."
+          ></textarea>
+
+          <label className="text-2xl font-medium mb-1" htmlFor="slug">
+            Slug
+          </label>
+          <input
+            name="slug"
+            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
+            type="text"
+            placeholder="slug..."
+          />
+          <input
+            className="w-full mt-8 px-4 py-2 rounded-md font-medium bg-[#424e5a] text-white cursor-pointer"
+            type="submit"
+            value="Create"
+          />
+        </form>
+      </div>
+    </div>
+  );
+}
