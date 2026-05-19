@@ -12,11 +12,9 @@ export default function Hero() {
         />
       </div>
       <h1 className="text-center text-4xl font-bold tracking-tight leading-tight mt-10 font-serif p-5">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente exercitationem maxime culpa, ex fugiat rem fuga. Accusamus dolores, ipsam laudantium, earum repellat nemo assumenda numquam sint exercitationem voluptatum reiciendis maiores!
+        Nem tudo que é incerto deveria ser investigado. Algumas coisas são
+        desconhecidas por uma razão.
       </h1>
-      <p className="text-center leading-relaxed p-10">
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      </p>
     </>
   );
 }
