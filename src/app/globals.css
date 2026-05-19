@@ -5,6 +5,9 @@
   --foreground: #171717;
 
 }
+section {
+  background: inherit;
+}
 
 
 @theme inline {

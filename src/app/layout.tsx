@@ -39,10 +39,10 @@ export default function RootLayout({
       lang="en"
       className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className={` antialiased min-h-full flex flex-col`}>
+      <body className={` antialiased min-h-full flex flex-col bg-black`}>
         <Navbar />
         {children}
-        <section className="flex justify-center py-10">
+        <section className="flex justify-center py-10 bg-black">
           <Footer />
         </section>
       </body>
