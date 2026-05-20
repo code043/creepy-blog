@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { ReactNode, useEffect } from "react";
 import { useAuth } from "../context/auth-content";
 import { useRouter } from "next/navigation";
 
-export default function DashboardLayout({children}: { children: ReactNode}) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
 
@@ -13,17 +13,14 @@ export default function DashboardLayout({children}: { children: ReactNode}) {
     }
   }, [user, loading, router]);
 
-   if (loading)
-    return (
-      <div className="m-30">
-        <p className="text-center">Loading...</p>
-      </div>
-    );
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (!user) return null;
+
   return (
     <div className=" bg-black text-white min-h-225 py-30">
-    
       <main>{children}</main>
     </div>
   );

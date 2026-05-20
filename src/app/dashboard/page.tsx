@@ -16,14 +16,11 @@ export default function Dashboard() {
       year: "numeric",
     });
   }
-  if(!user) {
-    return null
-  }
 
   return (
     <>
       <h1 className="mx-auto text-center pb-10">
-        Welcome: <span className="text-blue-500">{user.username}</span>
+        Welcome: <span className="text-blue-500">{user?.username}</span>
       </h1>
       <div className="flex justify-center px-4">
         <ul className="grid w-full max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
