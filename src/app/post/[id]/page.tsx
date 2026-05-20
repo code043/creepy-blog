@@ -7,7 +7,7 @@ type Props = {
 export default async function PostPage({ params }: Props) {
   const { id } = await params;
   return (
-    <section className="bg-black h-full flex justify-center">
+    <section className="flex justify-center py-20 bg-black">
       <Article id={id} />
     </section>
   );

@@ -32,33 +32,36 @@ export default function Post({ id }: { id: string }) {
   if (loading) return <p>Loading...</p>;
   if (!post) return null;
   return (
-    <div className="flex flex-col gap-4 p-4 rounded-lg shadow-sm bg-[#060309] text-white w-125">
-      <div className="">
-        <h1 className=" text-4xl font-bold tracking-tight leading-tight mt-10 font-serif p-5">
-          {post.title}
-        </h1>
-        {post?.image && (
-          <Image src={post.image} alt="imagem" width={800} height={500} />
-        )}
+    <div className=" text-white bg-black px-10">
+      <div className="flex justify-center font-sans">
+        <div>
+          <h1 className=" text-4xl font-bold tracking-tight leading-tight mt-10 p-5">
+            {post.title}
+          </h1>
+          {post.image && (
+            <Image src={post?.image} alt="imagem" width={800} height={500} />
+          )}
+          <h2 className="text-2xl my-3">{post.description}</h2>
+          <div className="flex justify-center max-w-200">
+            <p className="p-1 mt-3 hyphens-auto">{post.content}</p>
+          </div>
+          <p className="my-8">{setDate(post.createdAt)}</p>
+          <div className="flex justify-between py-8">
+            <Link
+              href={"/dashboard/edit/" + id}
+              className="text-center cursor-pointer  text-sm font-medium  text-blue-500"
+            >
+              Edit
+            </Link>
 
-        <h2 className="text-2xl">{post.description}</h2>
-        <p>{setDate(post?.createdAt)}</p>
-
-        <div className="flex justify-between">
-          <Link
-            href={"/dashboard/edit/" + id}
-            className="px-5 py-2 w-20 rounded-md bg-green-400"
-          >
-            Edit
-          </Link>
-
-          <button
-            onClick={handleDelete}
-            disabled={deleting}
-            className="px-5 py-2 w-20 rounded-md bg-red-400"
-          >
-            {deleting ? "..." : "Delete"}
-          </button>
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-center cursor-pointer text-sm font-medium text-red-400"
+            >
+              {deleting ? "..." : "Delete"}
+            </button>
+          </div>
         </div>
       </div>
     </div>

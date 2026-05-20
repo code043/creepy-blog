@@ -6,7 +6,7 @@ type Props = {
 export default async function page({ params }: Props) {
   const { id } = await params;
   return (
-    <section>
+    <section className="flex justify-center">
       <EditPost id={id} />
     </section>
   );

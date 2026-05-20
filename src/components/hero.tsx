@@ -11,7 +11,7 @@ export default function Hero() {
           height={500}
         />
       </div>
-      <h1 className="text-center text-4xl font-bold tracking-tight leading-tight mt-10 font-serif p-5">
+      <h1 className="text-center text-4xl font-bold tracking-tight leading-tight mt-10 font-sans p-5 w-300">
         Nem tudo que é incerto deveria ser investigado. Algumas coisas são
         desconhecidas por uma razão.
       </h1>
