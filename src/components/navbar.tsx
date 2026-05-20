@@ -25,18 +25,24 @@ export default function Navbar() {
             <li>
               <Link href="/about">ABOUT</Link>
             </li>
-            <li>
-              <Link href="/dashboard">DASHBOARD</Link>
-            </li>
-            <li>
-              <Link href="/dashboard/new">NEW</Link>
-            </li>
+            
+            {user && (
+              <>
+                <li>
+                  <Link href="/dashboard">DASHBOARD</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/new">NEW</Link>
+                </li>
+              </>
+            )}
+            { user === null && !loading ? <div className={`w-5 h-5 rounded-full bg-red-500 `} /> : null}
             {loading ? (
               <div className="w-5 h-5 rounded-full bg-zinc-600 animate-pulse" />
             ) : user ? (
               <li>
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
+                  <div className="w-5 h-5 text-white bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
                     {user.name[0]}
                   </div>
                 </div>
