@@ -73,7 +73,7 @@ export default function EditPost({ id }: { id: string }) {
   }
 
   return (
-    <div className="bg-[#060309] text-[#f5b461] flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
+    <div className="bg-[#060309] text-[#f5b461] flex justify-center gap-4 p-4 rounded-lg shadow-sm w-200 px-20 pb-15 pt-10">
       <div className="w-full">
         <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
           Edit Post
