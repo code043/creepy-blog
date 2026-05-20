@@ -1,0 +1,32 @@
+"use client";
+import { useOnePost } from "@/hooks/useOnePost";
+import Image from "next/image";
+
+export default function Article({ id }: { id: string }) {
+  const { post, loading } = useOnePost(id);
+
+  // function setDate(d: string | undefined) {
+  //   if (typeof d !== "string") return "error";
+  //   const date = new Date(d);
+  //   return date.toLocaleDateString("pt-BR", {
+  //     day: "2-digit",
+  //     month: "2-digit",
+  //     year: "numeric",
+  //   });
+  // }
+
+  if (loading) return <p>Loading...</p>;
+  if (!post) return <p>Not found</p>;
+  return (
+    <div className="flex justify-center text-white bg-black">
+      <div className="">
+        <h1 className=" text-4xl font-bold tracking-tight leading-tight mt-10 font-serif p-5">
+          {post.title}
+        </h1>
+        <Image src={post?.image} alt="imagem" width={800} height={500} />
+        <h2>{post.description}</h2>
+        <p>{post.content}</p>
+      </div>
+    </div>
+  );
+}

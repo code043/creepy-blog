@@ -38,13 +38,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased bg-black`}
     >
       <body className={` antialiased min-h-full flex flex-col bg-black`}>
         <AuthProvider>
           <Navbar />
           {children}
-          <section className="flex justify-center py-10 bg-black">
+          <section className="flex justify-center">
             <Footer />
           </section>
         </AuthProvider>
