@@ -1,22 +1,25 @@
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function newPostService(
+export async function editPostService(
   title: string,
   description: string,
   content: string,
   slug: string,
-  file: File,
+  file: File | undefined,
   token: string,
+  id: string,
 ) {
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
   formData.append("content", content);
   formData.append("slug", slug);
-  formData.append("file", file);
+  if (file && file.size > 0) {
+    formData.append("file", file);
+  }
 
-  const res = await fetch(`${baseURL}/api/posts/new`, {
-    method: "POST",
+  const res = await fetch(`${baseURL}/api/posts/${id}`, {
+    method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,9 +30,8 @@ export async function newPostService(
 
   if (!res.ok) {
     return {
-      error: data.message || "Creation error",
+      error: data.message || "Edition error",
     };
   }
-  console.log(data);
   return data;
 }

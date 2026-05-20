@@ -37,7 +37,10 @@ export default function Post({ id }: { id: string }) {
         <h1 className=" text-4xl font-bold tracking-tight leading-tight mt-10 font-serif p-5">
           {post.title}
         </h1>
-        <Image src={post?.image} alt="imagem" width={800} height={500} />
+        {post?.image && (
+          <Image src={post.image} alt="imagem" width={800} height={500} />
+        )}
+
         <h2 className="text-2xl">{post.description}</h2>
         <p>{setDate(post?.createdAt)}</p>
 
