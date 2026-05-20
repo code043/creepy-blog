@@ -1,5 +1,7 @@
 export default function Footer() {
   return (
+    <>
+    
     <footer className="flex justify-center w-full h-100 bg-[#060309] text-[#f5b461]">
       <div className="py-8 px-10 w-125 flex justify-end items-center flex-col">
         <h1 className="text-center text-4xl font-creepster">Creepy</h1>
@@ -20,5 +22,7 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    
+    </>
   );
 }

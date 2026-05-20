@@ -18,7 +18,7 @@ export default function Login() {
     }
   }
   return (
-    <div className="bg-[#060309] text-[#f5b461]  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125    h-100 px-20 pb-15">
+    <div className="bg-[#060309] text-[#f5b461]  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 h-100 px-20 pb-15 mt-20">
       <div className="w-full">
         <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
           Login
