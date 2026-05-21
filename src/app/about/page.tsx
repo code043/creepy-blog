@@ -1,3 +1,4 @@
+
 export default function AboutPage() {
   return (
     <section className="flex justify-center py-10">
@@ -17,4 +18,5 @@ export default function AboutPage() {
       </div>
     </section>
   );
+  
 }

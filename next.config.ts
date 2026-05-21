@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.0.6"],
   images: {
     domains: ["res.cloudinary.com"],
+   
   },
+
   experimental: {
     serverActions: {
       bodySizeLimit: "10mb",

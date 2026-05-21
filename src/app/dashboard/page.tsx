@@ -3,19 +3,11 @@ import { usePosts } from "@/hooks/usePosts";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../context/auth-content";
+import { formatDate } from "@/utils/format";
 
 export default function Dashboard() {
   const { user } = useAuth();
   const { posts } = usePosts();
-
-  function setDate(d: string) {
-    const date = new Date(d);
-    return date.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  }
 
   return (
     <>
@@ -54,7 +46,7 @@ export default function Dashboard() {
                   See post
                 </Link>
 
-                <span className="text-sm">{setDate(post.createdAt)}</span>
+                <span className="text-sm">{formatDate(post.createdAt)}</span>
               </div>
             </li>
           ))}

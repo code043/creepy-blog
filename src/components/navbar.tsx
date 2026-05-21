@@ -53,7 +53,7 @@ export default function Navbar() {
             ) : user ? (
               <li>
                 <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold uppercase">
-                  {user.name?.[0] ?? "?"}
+                  {user.username?.[0] ?? "?"}
                 </div>
               </li>
             ) : (

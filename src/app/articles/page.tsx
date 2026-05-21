@@ -2,20 +2,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePaginationSearch } from "@/hooks/usePaginationSearch";
+import { formatDate } from "@/utils/format";
+
+type ContentBlock = { type: string; value: string };
+
+function getContentPreview(content: unknown, maxLength = 150): string {
+  if (typeof content === "string") return content.substring(0, maxLength);
+  if (Array.isArray(content)) {
+    const text = (content as ContentBlock[])
+      .filter((b) => b.type === "paragraph" || b.type === "subtitle")
+      .map((b) => b.value)
+      .join(" ");
+    return text.substring(0, maxLength);
+  }
+  return "";
+}
 
 export default function AllArticlesPage() {
   const { posts, page, lastPage, search, setSearch, nextPage, prevPage } =
     usePaginationSearch();
 
-  function setDate(d: string | undefined) {
-    if (typeof d !== "string") return "error";
-    const date = new Date(d);
-    return date.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-  }
   return (
     <section className="bg-black px-4 py-30">
       <div className="flex justify-center my-8">
@@ -43,10 +49,10 @@ export default function AllArticlesPage() {
                   </div>
                 )}
                 <div className="w-full md:w-1/2 p-3 flex flex-col bg-white">
-                  <h1 className="font-bold mb-2">{post.title}</h1>
-                  <h2 className="font-semibold mb-2">{post.description}</h2>
-                  <p className="mb-4">
-                    {post.content.substring(0, 150)}...
+                  <h1 className="font-bold mb-2 text-2xl">{post.title}</h1>
+                  <h2 className="font-medium mb-2">{post.description}</h2>
+                  <p className="mb-4 text-gray-700">
+                    {getContentPreview(post.content)}...
                     <Link
                       href={`/post/${post.slug}`}
                       className="text-blue-400 ml-2 hover:underline"
@@ -54,8 +60,8 @@ export default function AllArticlesPage() {
                       ver post
                     </Link>
                   </p>
-                  <span className="mt-auto">
-                    published: {setDate(post.createdAt)}
+                  <span className="mt-auto text-gray-700">
+                    published: {formatDate(post.createdAt)}
                   </span>
                 </div>
               </div>

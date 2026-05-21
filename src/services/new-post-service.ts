@@ -1,35 +1,49 @@
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function newPostService(
-  title: string,
-  description: string,
-  content: string,
-  slug: string,
+export async function uploadFileService(
   file: File,
   token: string,
-) {
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("description", description);
-  formData.append("content", content);
-  formData.append("slug", slug);
-  formData.append("file", file);
+): Promise<string> {
+  const fd = new FormData();
+  fd.append("file", file);
 
-  const res = await fetch(`${baseURL}/api/posts/new`, {
+  const res = await fetch(`${baseURL}/api/posts/upload`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
+    headers: { Authorization: `Bearer ${token}` },
+    body: fd,
   });
 
   const data = await res.json();
 
   if (!res.ok) {
-    return {
-      error: data.message || "Creation error",
-    };
+    throw new Error(data.message || "Upload error");
   }
-  console.log(data);
+
+  return data.url ?? data.secure_url ?? "";
+}
+
+export async function newPostService(
+  title: string,
+  description: string,
+  content: object,
+  slug: string,
+  image: string | undefined,
+  token: string,
+) {
+  const res = await fetch(`${baseURL}/api/posts/new`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ title, description, content, slug, image }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    return { error: data.message || "Creation error" };
+  }
+
   return data;
 }
