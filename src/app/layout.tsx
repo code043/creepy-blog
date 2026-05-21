@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Creepy",
   description: "Blog about mysteries",
 };
@@ -42,11 +42,11 @@ export default function RootLayout({
     >
       <body className={` antialiased min-h-full flex flex-col bg-black`}>
         <AuthProvider>
-          <Navbar />
-          {children}
-          <section className="flex justify-center">
-            <Footer />
-          </section>
+            <Navbar />
+            {children}
+            <section className="flex justify-center">
+              <Footer />
+            </section>
         </AuthProvider>
       </body>
     </html>

@@ -12,13 +12,18 @@ export default function Navbar() {
   return (
     <header className="fixed w-full text-4xl shadow-sm bg-[#060309] text-[#f5b461] border-b border-b-[#f5b461]/40 z-50">
       <div className="flex items-center justify-between px-6 py-4">
+        {/* LOGO */}
         <Link href="/">
-          <h2 className="font-creepster text-center text-4xl tracking-tight leading-8">
+          <h2 className="font-creepster text-4xl tracking-tight leading-8">
             Creepy
           </h2>
         </Link>
-        <nav className="hidden md:block font-bold text-[12px]">
-          <ul className="flex space-x-8">
+
+        {/* SEARCH */}
+
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:block font-bold text-[12px] mx-10">
+          <ul className="flex space-x-8 items-center">
             <li>
               <Link href="/">HOME</Link>
             </li>
@@ -39,65 +44,63 @@ export default function Navbar() {
                 </li>
               </>
             )}
-            {user === null && !loading ? (
-              <div className={`w-5 h-5 rounded-full bg-red-500 `} />
-            ) : null}
+
+            {/* AUTH STATUS */}
             {loading ? (
-              <div className="w-5 h-5 rounded-full bg-zinc-600 animate-pulse" />
+              <li>
+                <div className="w-5 h-5 rounded-full bg-zinc-600 animate-pulse" />
+              </li>
             ) : user ? (
               <li>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 text-white bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
-                    {user.name[0]}
-                  </div>
+                <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold uppercase">
+                  {user.name?.[0] ?? "?"}
                 </div>
               </li>
-            ) : null}
+            ) : (
+              <li>
+                <div className="w-5 h-5 rounded-full bg-red-500" />
+              </li>
+            )}
           </ul>
         </nav>
+
+        {/* MOBILE BUTTON */}
         <button
           onClick={() => setOpen((prev) => !prev)}
-          onTouchEnd={(e) => {
-            e.preventDefault();
-            setOpen((prev) => !prev);
-          }}
-          className="md:hidden p-3 touch-manipulation cursor-pointer"
+          className="md:hidden p-3"
           aria-label="Toggle menu"
         >
           <Menu />
         </button>
       </div>
+
+      {/* MOBILE MENU */}
       {open && (
-        <div className="md:hidden bg-[#060309] text-[#f5b461] px-6 pb-4 transition-all duration-200">
-          <nav className="flex flex-col gap-4 font-bold text-sm list-none">
-            <li>
-              <Link href="/" onClick={() => setOpen(false)}>
-                HOME
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" onClick={() => setOpen(false)}>
-                ABOUT
-              </Link>
-            </li>
+        <div className="md:hidden bg-[#060309] text-[#f5b461] px-6 pb-4">
+          <nav className="flex flex-col gap-4 font-bold text-sm">
+            <Link href="/" onClick={() => setOpen(false)}>
+              HOME
+            </Link>
+            <Link href="/about" onClick={() => setOpen(false)}>
+              ABOUT
+            </Link>
+
             {user && (
               <>
-                <li>
-                  <Link href="/dashboard">DASHBOARD</Link>
-                </li>
-                <li>
-                  <Link href="/dashboard/new">NEW</Link>
-                </li>
+                <Link href="/dashboard" onClick={() => setOpen(false)}>
+                  DASHBOARD
+                </Link>
+                <Link href="/dashboard/new" onClick={() => setOpen(false)}>
+                  NEW
+                </Link>
               </>
             )}
-            {user && (
-              <li>
-                <div className="flex items-center gap-2">
-                  <div className=" text-blue-500 flex items-center justify-center text-sm font-bold uppercase">
-                    {user.username}
-                  </div>
-                </div>
-              </li>
+
+            {/* MOBILE USER */}
+            {!loading && user && (
+              <div className="text-blue-500 font-bold uppercase">
+                {user.username ?? user.name ?? "user"}
+              </div>
             )}
           </nav>
         </div>

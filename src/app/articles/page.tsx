@@ -1,11 +1,12 @@
 "use client";
-import { usePagination } from "@/hooks/usePagination";
 import Image from "next/image";
 import Link from "next/link";
+import { usePaginationSearch } from "@/hooks/usePaginationSearch";
 
 export default function AllArticlesPage() {
-  const { posts, page, lastPage, nextPage, prevPage } = usePagination();
-  console.group(posts);
+  const { posts, page, lastPage, search, setSearch, nextPage, prevPage } =
+    usePaginationSearch();
+
   function setDate(d: string | undefined) {
     if (typeof d !== "string") return "error";
     const date = new Date(d);
@@ -17,6 +18,14 @@ export default function AllArticlesPage() {
   }
   return (
     <section className="bg-black px-4 py-30">
+      <div className="flex justify-center my-8">
+        <input
+          className=" border hover:border-blue-500 text-gray-400 outline-0 w-60 h-10 text-[15px] indent-1 rounded-md"
+          placeholder="Search posts..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <div className="max-w-5xl mx-auto w-full">
         <ul className="space-y-6">
           {posts.map((post) => (
