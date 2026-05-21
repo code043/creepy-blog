@@ -17,7 +17,7 @@ export default function Articles() {
               <li key={post.id} className="flex flex-col  ">
                 <div className="overflow-hidden h-50 relative w-full">
                   {post.image && (
-                    <Link href={"/post/" + post.id}>
+                    <Link href={"/post/" + post.slug}>
                       <Image
                         src={post.image}
                         width={300}

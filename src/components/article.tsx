@@ -1,9 +1,9 @@
 "use client";
-import { useOnePost } from "@/hooks/useOnePost";
+import { usePostBySlug } from "@/hooks/usePostBySlug";
 import Image from "next/image";
 
-export default function Article({ id }: { id: string }) {
-  const { post, loading } = useOnePost(id);
+export default function Article({ slug }: { slug: string }) {
+  const { post, loading } = usePostBySlug(slug);
 
   function setDate(d: string | undefined) {
     if (typeof d !== "string") return "error";
