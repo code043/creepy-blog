@@ -34,7 +34,7 @@ export default function Post({ id }: { id: string }) {
   return (
     <div className=" text-white bg-black px-10">
       <div className="flex justify-center font-sans">
-        <div>
+        <div className="bg-black min-h-screen" >
           <h1 className=" text-4xl font-bold tracking-tight leading-tight mt-10 p-5">
             {post.title}
           </h1>

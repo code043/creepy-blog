@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   if (!user) return null;
 
   return (
-    <div className=" bg-black text-white min-h-225 py-30">
+    <div className=" bg-black text-white min-h-screen py-30">
       <main>{children}</main>
     </div>
   );

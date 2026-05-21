@@ -10,7 +10,7 @@ export default function Navbar() {
   const { user, loading } = useAuth();
 
   return (
-    <header className="fixed text-4xl w-full shadow-sm bg-[#060309] text-[#f5b461] z-50">
+    <header className="fixed w-full text-4xl shadow-sm bg-[#060309] text-[#f5b461] border-b border-b-[#f5b461]/40 z-50">
       <div className="flex items-center justify-between px-6 py-4">
         <Link href="/">
           <h2 className="font-creepster text-center text-4xl tracking-tight leading-8">
