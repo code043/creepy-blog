@@ -22,11 +22,11 @@ export function usePublicPosts() {
         throw new Error("Search posts error!");
       }
 
-      const data = await res.json();
-      setPosts(data.posts ?? data);
+      const { data } = await res.json();
+      setPosts(data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message || "Somethin went wrong!");
+      setError(err.message || "Something went wrong!");
     } finally {
       setLoading(false);
     }

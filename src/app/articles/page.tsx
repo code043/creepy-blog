@@ -1,10 +1,11 @@
 "use client";
-import { usePublicPosts } from "@/hooks/usePublicPosts";
+import { usePagination } from "@/hooks/usePagination";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function AllArticlesPage() {
-  const { posts } = usePublicPosts();
+  const { posts, page, lastPage, nextPage, prevPage } = usePagination();
+  console.group(posts);
   function setDate(d: string | undefined) {
     if (typeof d !== "string") return "error";
     const date = new Date(d);
@@ -52,6 +53,27 @@ export default function AllArticlesPage() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="flex justify-center gap-4 mt-10">
+        <button
+          onClick={prevPage}
+          disabled={page === 1}
+          className="px-4 py-2 border text-white disabled:opacity-30 hover:bg-green-400 hover:text-white cursor-pointer"
+        >
+          ← Anterior
+        </button>
+
+        <span className="text-white">
+          Página {page} de {lastPage}
+        </span>
+
+        <button
+          onClick={nextPage}
+          disabled={page === lastPage}
+          className="px-4 py-2 border text-white disabled:opacity-30  hover:bg-green-400 hover:text-white cursor-pointer"
+        >
+          Próxima →
+        </button>
       </div>
     </section>
   );
