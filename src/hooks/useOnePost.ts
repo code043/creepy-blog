@@ -23,7 +23,7 @@ export function useOnePost(id: string) {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${baseURL}/api/posts/${id}`, {
+      const res = await fetch(`${baseURL}/api/posts/id/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       });
