@@ -23,9 +23,12 @@ export default function Navbar() {
               <Link href="/">HOME</Link>
             </li>
             <li>
+              <Link href="/articles">ARTICLES</Link>
+            </li>
+            <li>
               <Link href="/about">ABOUT</Link>
             </li>
-            
+
             {user && (
               <>
                 <li>
@@ -36,7 +39,9 @@ export default function Navbar() {
                 </li>
               </>
             )}
-            { user === null && !loading ? <div className={`w-5 h-5 rounded-full bg-red-500 `} /> : null}
+            {user === null && !loading ? (
+              <div className={`w-5 h-5 rounded-full bg-red-500 `} />
+            ) : null}
             {loading ? (
               <div className="w-5 h-5 rounded-full bg-zinc-600 animate-pulse" />
             ) : user ? (
@@ -75,12 +80,16 @@ export default function Navbar() {
                 ABOUT
               </Link>
             </li>
-            <li>
-              <Link href="/dashboard">DASHBOARD</Link>
-            </li>
-            <li>
-              <Link href="/dashboard/new">NEW</Link>
-            </li>
+            {user && (
+              <>
+                <li>
+                  <Link href="/dashboard">DASHBOARD</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/new">NEW</Link>
+                </li>
+              </>
+            )}
             {user && (
               <li>
                 <div className="flex items-center gap-2">
