@@ -3,14 +3,34 @@
 import { useAuth } from "@/app/context/auth-content";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { user, loading } = useAuth();
+  const navRef = useRef<HTMLElement>(null);
+
+  // Fecha o menu ao clicar fora do header
+  useEffect(() => {
+    if (!open) return;
+
+    function handleClickOutside(e: MouseEvent | TouchEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [open]);
 
   return (
-    <header className="w-full fixed bg-[#060309] flex justify-center shadow-sm text-[#f5b461] border-b border-b-[#f5b461]/40 z-50">
+    <header ref={navRef} className="w-full fixed bg-[#060309] flex justify-center shadow-sm text-[#f5b461] border-b border-b-[#f5b461]/40 z-50">
       <div className="w-full max-w-[1800] text-4xl ">
       <div className="flex items-center justify-between px-6 py-4">
         {/* LOGO */}
