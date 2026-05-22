@@ -1,10 +1,10 @@
 "use client";
-import { usePublicPosts } from "@/hooks/usePublicPosts";
+import { useLatestPosts } from "@/hooks/useLatestPosts";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Articles() {
-  const { posts } = usePublicPosts();
+  const { posts } = useLatestPosts()
   return (
     <div>
       <Link href={"/articles"}>
