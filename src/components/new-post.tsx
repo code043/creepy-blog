@@ -223,17 +223,7 @@ export default function NewPost() {
             required
           />
 
-          {/* Content builder */}
-          <div className="flex items-center justify-between mt-4">
-            <span className="text-2xl font-medium">Content</span>
-            <button
-              type="button"
-              onClick={addBlock}
-              className="px-3 py-1 text-sm border border-[#f5b461] rounded hover:bg-[#f5b461] hover:text-black transition-colors"
-            >
-              + Add block
-            </button>
-          </div>
+          
 
           {blocks.length === 0 && (
             <p className="text-sm text-gray-500 italic">
@@ -321,7 +311,17 @@ export default function NewPost() {
               </div>
             ))}
           </div>
-
+            {/* Content builder */}
+          <div className="flex items-center justify-between mt-4">
+            <span className="text-2xl font-medium">Content</span>
+            <button
+              type="button"
+              onClick={addBlock}
+              className="px-3 py-1 text-sm border border-[#f5b461] rounded hover:bg-[#f5b461] hover:text-black transition-colors"
+            >
+              + Add block
+            </button>
+          </div>
           {error && <p className="text-red-400 text-sm">{error}</p>}
 
           <button
