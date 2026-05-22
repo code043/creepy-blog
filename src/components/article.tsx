@@ -55,7 +55,7 @@ export default function Article({ slug }: { slug: string }) {
             )}
           </div>
           <div className="text-2xl my-10 px-3">
-            <h2 className="text-2xl px-3 font-body">{post.description}</h2>
+            <h2 className="text-2xl px-3 max-w-200 wrap-break-word font-body">{post.description}</h2>
           </div>
 
           <div className="flex flex-col gap-4 max-w-200 px-3 mt-3">

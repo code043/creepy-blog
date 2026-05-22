@@ -1,5 +1,6 @@
 "use client";
 
+import { mapPost } from "@/mappers/postMapper";
 import { Post } from "@/types/post";
 import { useEffect, useState, useCallback } from "react";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -21,7 +22,8 @@ export function usePostBySlug(slug: string) {
       }
 
       const data = await res.json();
-      setPost(data.ṕost ?? data);
+      setPost(mapPost(data.post ?? data));
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Something went wrong!");

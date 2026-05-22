@@ -136,7 +136,7 @@ export default function NewPost() {
         coverUrl = await uploadFileService(coverFile, token);
       }
 
-      await newPostAction(
+      const result = await newPostAction(
         title,
         description,
         contentJson,
@@ -144,6 +144,15 @@ export default function NewPost() {
         coverUrl,
         token,
       );
+      if (result?.error) {
+        setError(
+          typeof result.error === "string"
+            ? result.error
+            : JSON.stringify(result.error),
+        );
+        return;
+      }
+
       router.push("/dashboard");
     } catch (err) {
       console.error(err);
@@ -222,8 +231,6 @@ export default function NewPost() {
             onChange={(e) => setSlug(e.target.value)}
             required
           />
-
-          
 
           {blocks.length === 0 && (
             <p className="text-sm text-gray-500 italic">
@@ -311,7 +318,7 @@ export default function NewPost() {
               </div>
             ))}
           </div>
-            {/* Content builder */}
+          {/* Content builder */}
           <div className="flex items-center justify-between mt-4">
             <span className="text-2xl font-medium">Content</span>
             <button

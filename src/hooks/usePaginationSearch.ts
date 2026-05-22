@@ -1,4 +1,5 @@
 "use client";
+import { mapPost } from "@/mappers/postMapper";
 import { Post } from "@/types/post";
 import { useState, useEffect } from "react";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -29,7 +30,7 @@ export function usePaginationSearch() {
         const postsArray = json?.data?.data ?? json?.data ?? [];
         const last = json?.data?.lastPage ?? json?.lastPage ?? 1;
 
-        setPosts(postsArray);
+        setPosts(postsArray.map(mapPost));
         setLastPage(last);
       } catch (err) {
         console.error(err);

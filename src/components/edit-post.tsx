@@ -22,6 +22,7 @@ export default function EditPost({ id }: { id: string }) {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { post, loading } = useOnePost(id);
+  
 
   // Fields
   const [title, setTitle] = useState("");
