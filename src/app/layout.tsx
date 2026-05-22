@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Creepster, Inter, IM_Fell_English } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Creepster,
+  Inter,
+  IM_Fell_English,
+} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -38,21 +44,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
       className={`${imFell.className} ${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased bg-black`}
     >
-      <body className={` antialiased min-h-full flex flex-col bg-black`}>
+      <body className="bg-black text-white overflow-x-hidden">
         <AuthProvider>
-            <Navbar />
-            {children}
-            <section className="flex justify-center">
-              <Footer />
-            </section>
+          <Navbar />
+
+          <main className="w-full max-w-5xl mx-auto px-4">{children}</main>
+
+          <Footer />
         </AuthProvider>
       </body>
     </html>

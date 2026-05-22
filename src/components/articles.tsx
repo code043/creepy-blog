@@ -12,11 +12,11 @@ export default function Articles() {
           Posts
         </h1>
       </Link>
-      <div className="mx-auto flex justify-center md:flex-col">
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 w-87.5 md:w-200">
+      <div className="mx-auto">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           {posts.map((post) => {
             return (
-              <li key={post.id} className="flex flex-col  ">
+              <li key={post.id} className="flex flex-col">
                 <div className="overflow-hidden h-50 relative w-full">
                   {post.image && (
                     <Link href={"/post/" + post.slug}>
@@ -25,7 +25,7 @@ export default function Articles() {
                         width={300}
                         height={200}
                         alt="image"
-                        className="object-cover h-full"
+                        className="object-cover w-full h-full block"
                       />
                     </Link>
                   )}
