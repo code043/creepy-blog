@@ -26,8 +26,8 @@ export default function Post({ id }: { id: string }) {
   return (
     <div className="text-white bg-black px-10">
       <div className="flex flex-col items-center font-sans">
-        <div className="">
-          <h1 className="max-w-200 text-4xl font-bold tracking-tight leading-tight mt-30 mb-20">
+        <div >
+          <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mb-5">
             {post.title}
           </h1>
 
@@ -81,8 +81,9 @@ export default function Post({ id }: { id: string }) {
               }
             })}
           </div>
-          <div className="text-2xl mt-10 px-3">
-            <p className="my-8 px-3 mx-auto">{formatDate(post.createdAt)}</p>
+           <div className="flex justify-between items-center text-2xl mt-10 px-3 text-gray-300">
+            <p className="my-8 px-3">{formatDate(post.createdAt)}</p>
+            <p>{post.views} views</p>
           </div>
         </div>
       </div>

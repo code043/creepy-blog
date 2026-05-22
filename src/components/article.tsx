@@ -2,18 +2,45 @@
 import { usePostBySlug } from "@/hooks/usePostBySlug";
 import { ContentBlock } from "@/types/blocks";
 import { formatDate } from "@/utils/format";
+import { useEffect } from "react";
 import Image from "next/image";
+
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Article({ slug }: { slug: string }) {
   const { post, loading } = usePostBySlug(slug);
 
+ useEffect(() => {
+  if (!post) return;
+
+  let active = true;
+
+  const timer = setTimeout(() => {
+    if (active) {
+      fetch(`${baseURL}/api/posts/${slug}/view`, {
+        method: "POST",
+      });
+    }
+  }, 120000);
+
+  const handleVisibility = () => {
+    active = !document.hidden;
+  };
+
+  document.addEventListener("visibilitychange", handleVisibility);
+
+  return () => {
+    clearTimeout(timer);
+    document.removeEventListener("visibilitychange", handleVisibility);
+  };
+}, [post, slug]);
   if (loading) return <p>Loading...</p>;
   if (!post) return <p>Not found</p>;
   return (
     <div className="text-white bg-black px-10">
       <div className="flex flex-col items-center font-sans">
         <div className="">
-          <h1 className="max-w-200 text-4xl font-bold tracking-tight leading-tight mt-30 mb-20">
+          <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mt-10 mb-5">
             {post.title}
           </h1>
 
@@ -27,8 +54,8 @@ export default function Article({ slug }: { slug: string }) {
               />
             )}
           </div>
-          <div className="text-2xl mt-10 px-3">
-            <h2 className="text-2xl mt-10 px-3">{post.description}</h2>
+          <div className="text-2xl my-10 px-3">
+            <h2 className="text-2xl px-3">{post.description}</h2>
           </div>
 
           <div className="flex flex-col gap-4 max-w-200 px-3 mt-3">
@@ -37,7 +64,7 @@ export default function Article({ slug }: { slug: string }) {
                 case "paragraph":
                   return (
                     <div key={i} className="flex justify-center max-w-200">
-                      <p className="px-3 mt-3 indent hyphens-auto">
+                      <p className="px-3 mb-3 indent hyphens-auto">
                         {block.value}
                       </p>
                     </div>
@@ -67,8 +94,9 @@ export default function Article({ slug }: { slug: string }) {
               }
             })}
           </div>
-          <div className="text-2xl mt-10 px-3">
-            <p className="my-8 px-3 mx-auto">{formatDate(post.createdAt)}</p>
+          <div className="flex justify-between items-center text-2xl mt-10 px-3 text-gray-300">
+            <p className="my-8 px-3">{formatDate(post.createdAt)}</p>
+            <p>{post.views} views</p>
           </div>
         </div>
       </div>

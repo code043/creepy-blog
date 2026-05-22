@@ -8,12 +8,17 @@ import { formatDate } from "@/utils/format";
 export default function Dashboard() {
   const { user } = useAuth();
   const { posts } = usePosts();
+  
+  
 
   return (
     <>
       <h1 className="mx-auto text-center pb-10">
         Welcome: <span className="text-blue-500">{user?.username}</span>
       </h1>
+      {posts.length === 0 &&  <h2 className="mx-auto text-center text-lg font-bold tracking-tight text">
+          You haven’t created any posts yet.
+        </h2>}
       <div className="flex justify-center px-4">
         <ul className="grid w-full max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (

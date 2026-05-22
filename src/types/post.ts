@@ -10,10 +10,10 @@ export type SubtitleBlock = {
 
 export type ImageBlock = {
   type: "image";
-  value: string; 
+  value: string;
 };
 
-export type ContentBlock = | ParagraphBlock | SubtitleBlock | ImageBlock; 
+export type ContentBlock = ParagraphBlock | SubtitleBlock | ImageBlock;
 
 export type Post = {
   id: string;
@@ -22,6 +22,7 @@ export type Post = {
   description: string;
   content: ContentBlock[];
   slug: string;
+  views: number;
   createdAt: string;
   updatedAt: string;
 };

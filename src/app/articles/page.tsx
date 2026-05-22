@@ -21,7 +21,6 @@ function getContentPreview(content: unknown, maxLength = 150): string {
 export default function AllArticlesPage() {
   const { posts, page, lastPage, search, setSearch, nextPage, prevPage } =
     usePaginationSearch();
-
   return (
     <section className="bg-black px-4 py-30">
       <div className="flex justify-center my-8">
@@ -32,6 +31,13 @@ export default function AllArticlesPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+      {posts.length === 0 && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight text">
+          We couldn’t find any results.
+        </h2>
+        </div>
+      )}
       <div className="max-w-5xl mx-auto w-full">
         <ul className="space-y-6">
           {posts.map((post) => (
@@ -48,7 +54,7 @@ export default function AllArticlesPage() {
                     />
                   </div>
                 )}
-                <div className="w-full md:w-1/2 p-3 flex flex-col bg-white">
+                <div className="w-full md:w-1/2 p-3 flex flex-col bg-white min-h-full">
                   <h1 className="font-bold mb-2 text-2xl">{post.title}</h1>
                   <h2 className="font-medium mb-2">{post.description}</h2>
                   <p className="mb-4 text-gray-700">
@@ -60,9 +66,14 @@ export default function AllArticlesPage() {
                       ver post
                     </Link>
                   </p>
-                  <span className="mt-auto text-gray-700">
-                    published: {formatDate(post.createdAt)}
-                  </span>
+                 <div className="mt-auto flex justify-between text-gray-700">
+                   <p className="">
+                    {formatDate(post.createdAt)}
+                  </p>
+                  <p className="">
+                    {post.views} views
+                  </p>
+                 </div>
                 </div>
               </div>
             </li>
