@@ -13,7 +13,7 @@ export default function Hero() {
           />
 
           <div className=" max-w-200">
-            <h1 className="text-center md:text-3xl font-bold mt-10 hyphens-auto text-[#56687d]">
+            <h1 className="font-imfell text-center md:text-3xl font-bold mt-10 hyphens-auto text-gray-300">
               Nem tudo que é incerto deveria ser investigado. Algumas coisas são
               desconhecidas por uma razão.
             </h1>

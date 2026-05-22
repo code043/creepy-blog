@@ -38,9 +38,9 @@ export default function Article({ slug }: { slug: string }) {
   if (!post) return <p>Not found</p>;
   return (
     <div className="text-white bg-black px-10">
-      <div className="flex flex-col items-center font-sans">
+      <div className="flex flex-col items-center">
         <div className="">
-          <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mt-10 mb-5">
+          <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mt-10 mb-5 font-body">
             {post.title}
           </h1>
 
@@ -55,7 +55,7 @@ export default function Article({ slug }: { slug: string }) {
             )}
           </div>
           <div className="text-2xl my-10 px-3">
-            <h2 className="text-2xl px-3">{post.description}</h2>
+            <h2 className="text-2xl px-3 font-body">{post.description}</h2>
           </div>
 
           <div className="flex flex-col gap-4 max-w-200 px-3 mt-3">
@@ -94,7 +94,7 @@ export default function Article({ slug }: { slug: string }) {
               }
             })}
           </div>
-          <div className="flex justify-between items-center text-2xl mt-10 px-3 text-gray-300">
+          <div className="flex justify-between items-center text-[10px] mt-10 px-3 text-gray-300 font-body">
             <p className="my-8 px-3">{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>

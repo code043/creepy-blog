@@ -25,7 +25,23 @@ export default function Post({ id }: { id: string }) {
   if (!post) return null;
   return (
     <div className="text-white bg-black px-10">
-      <div className="flex flex-col items-center font-sans">
+      <div className="flex flex-col items-center font-body">
+        <div className="flex justify-center gap-20 py-8">
+        <Link
+          href={"/dashboard/edit/" + id}
+          className="text-center cursor-pointer text-sm font-body font-medium hover:underline  text-blue-500"
+        >
+          Editar
+        </Link>
+
+        <button
+          onClick={handleDelete}
+          disabled={deleting}
+          className="text-center cursor-pointer text-sm font-body font-medium hover:underline text-red-400"
+        >
+          {deleting ? "..." : "Deletar"}
+        </button>
+      </div>
         <div >
           <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mb-5">
             {post.title}
@@ -45,7 +61,7 @@ export default function Post({ id }: { id: string }) {
             <h2 className="text-2xl mt-10 px-3">{post.description}</h2>
           </div>
 
-          <div className="flex flex-col gap-4 max-w-200 px-3 mt-3">
+          <div className="flex flex-col gap-4 max-w-200 px-3 mt-3 font-body">
             {(post.content as ContentBlock[]).map((block: ContentBlock, i) => {
               switch (block.type) {
                 case "paragraph":
@@ -81,26 +97,26 @@ export default function Post({ id }: { id: string }) {
               }
             })}
           </div>
-           <div className="flex justify-between items-center text-2xl mt-10 px-3 text-gray-300">
+           <div className="flex justify-between items-center text-[12px] font-body mt-10 px-3 text-gray-300">
             <p className="my-8 px-3">{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>
         </div>
       </div>
-      <div className="flex justify-between py-8">
+      <div className="flex justify-center gap-12 py-8">
         <Link
           href={"/dashboard/edit/" + id}
-          className="text-center cursor-pointer  text-sm font-medium  text-blue-500"
+          className="text-center cursor-pointer text-sm font-body font-medium hover:underline  text-blue-500"
         >
-          Edit post
+          Editar
         </Link>
 
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="text-center cursor-pointer text-sm font-medium text-red-400"
+          className="text-center cursor-pointer text-sm font-body font-medium hover:underline text-red-400"
         >
-          {deleting ? "..." : "Delete post"}
+          {deleting ? "..." : "Deletar"}
         </button>
       </div>
     </div>

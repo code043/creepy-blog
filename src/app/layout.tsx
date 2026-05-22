@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Creepster, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Creepster, Inter, IM_Fell_English } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { AuthProvider } from "./context/auth-content";
+
+const imFell = IM_Fell_English({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-imfell",
+});
 
 const creepster = Creepster({
   weight: "400",
@@ -38,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased bg-black`}
+      className={`${imFell.className} ${creepster.variable} ${inter.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased bg-black`}
     >
       <body className={` antialiased min-h-full flex flex-col bg-black`}>
         <AuthProvider>

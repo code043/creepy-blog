@@ -7,9 +7,11 @@ export default function Articles() {
   const { posts } = usePublicPosts();
   return (
     <div>
-      <h1 className="mx-auto mb-10 text-center text-2xl text-blue-100">
-        Articles
-      </h1>
+      <Link href={"/articles"}>
+        <h1 className="mx-auto mb-10 text-center text-4xl text-blue-100 underline font-creepster">
+          Posts
+        </h1>
+      </Link>
       <div className="mx-auto flex justify-center md:flex-col">
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 w-87.5 md:w-200">
           {posts.map((post) => {
@@ -28,8 +30,8 @@ export default function Articles() {
                     </Link>
                   )}
                 </div>
-                <Link href={"/"}>
-                  <p className="text-center px-3 py-4 text-[#526070]">
+                <Link href={"/post/" + post.slug}>
+                  <p className="text-center px-3 py-4 text-[#526070] hover:underline">
                     {post.description}
                   </p>
                 </Link>
