@@ -62,6 +62,7 @@ export default function Article({ slug }: { slug: string }) {
                 width={900}
                 height={200}
                 className="w-full h-full object-cover"
+                 
               />
             )}
           </div>
@@ -100,7 +101,8 @@ export default function Article({ slug }: { slug: string }) {
                           src={block.value}
                           alt="image"
                           fill
-                          className="object-cover"
+                          // className="object-cover"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     </div>
