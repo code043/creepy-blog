@@ -73,12 +73,12 @@ export default function Post({ id }: { id: string }) {
           </div>
 
           {/* CONTENT */}
-          <div className="flex flex-col gap-6 mt-6 px-2 font-body">
+          <div className="flex flex-col gap-6 mt-5 px-2 font-body">
             {(post.content as ContentBlock[]).map((block: ContentBlock, i) => {
               switch (block.type) {
                 case "paragraph":
                   return (
-                    <p key={i} className="text-base md:text-lg leading-relaxed">
+                    <p key={i} className="text-gray-400 text-base md:text-lg leading-relaxed">
                       {block.value}
                     </p>
                   );
@@ -92,16 +92,15 @@ export default function Post({ id }: { id: string }) {
 
                 case "image":
                   return (
-                    <div
-                      key={i}
-                      className="relative w-full h-[300px] overflow-hidden rounded-md"
-                    >
-                      <Image
-                        src={block.value}
-                        alt="imagem"
-                        fill
-                        className="object-cover"
-                      />
+                    <div key={i} className="w-full flex justify-center">
+                      <div className="relative w-[350px] h-[250px] overflow-hidden">
+                        <Image
+                          src={block.value}
+                          alt="image"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   );
 

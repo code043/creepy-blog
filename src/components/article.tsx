@@ -58,23 +58,28 @@ export default function Article({ slug }: { slug: string }) {
             )}
           </div>
           {/* DESCRIPTION */}
-          <h2 className="mt-8 text-xl md:text-2xl break-words leading-relaxed">
-            description
-          </h2>
-          CONTENT
-          <div className="flex flex-col gap-6 mt-8">
+          <div className="mt-10">
+            <h2 className="text-xl md:text-2xl px-2 font-body break-words whitespace-normal">
+              {post.description}
+            </h2>
+          </div>
+          {/* CONTENT */}
+          <div className="flex flex-col gap-6 mt-5 px-2 font-body">
             {(post.content as ContentBlock[]).map((block, i) => {
               switch (block.type) {
                 case "paragraph":
                   return (
-                    <p key={i} className="text-base md:text-lg leading-relaxed">
+                    <p
+                      key={i}
+                      className="text-gray-400 text-base md:text-lg leading-relaxed"
+                    >
                       {block.value}
                     </p>
                   );
 
                 case "subtitle":
                   return (
-                    <h2 key={i} className="text-2xl font-bold mt-6">
+                    <h2 key={i} className="text-2xl mt-8 font-bold">
                       {block.value}
                     </h2>
                   );
@@ -98,7 +103,8 @@ export default function Article({ slug }: { slug: string }) {
               }
             })}
           </div>
-          <div className="flex justify-between text-xs mt-10 text-gray-400">
+          {/* FOOTER INFO */}
+          <div className="flex justify-between items-center text-xs mt-10 px-2 text-gray-400 font-body">
             <p>{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>
