@@ -4,8 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   allowedDevOrigins: ["192.168.0.6"],
   images: {
-    domains: ["res.cloudinary.com"],
-   
+    domains: ["res.cloudinary.com", "creepy-backend.onrender.com"],
   },
 
   experimental: {
