@@ -19,65 +19,94 @@ function getContentPreview(content: unknown, maxLength = 150): string {
 }
 
 export default function AllArticlesPage() {
-  const { posts, page, lastPage, search, setSearch, nextPage, prevPage } =
-    usePaginationSearch();
+  const {
+    posts,
+    page,
+    lastPage,
+    search,
+    setSearch,
+    nextPage,
+    prevPage,
+    loadingInitial,
+    loadingSearch,
+  } = usePaginationSearch();
+
   return (
     <section className="bg-black px-4 py-30">
       <div className="flex justify-center my-8">
         <input
+          autoFocus
           className=" border hover:border-blue-500 text-gray-400 outline-0 w-60 h-10 text-[15px] indent-1 rounded-md"
           placeholder="Buscar posts..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      {posts.length === 0 && (
+      {/* INITIAL LOADING */}
+      {loadingInitial && !loadingSearch && (
         <div className="h-50">
-          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight text">
-          We couldn’t find any results.
-        </h2>
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            Carregando...
+          </h2>
+        </div>
+      )}
+      {/* SEARCH */}
+      {loadingSearch && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            Buscando...
+          </h2>
+        </div>
+      )}
+      {/* NO RESULTS */}
+      {posts.length === 0 && !loadingSearch && !loadingInitial && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            We couldn’t find any results.
+          </h2>
         </div>
       )}
       <div className="max-w-5xl mx-auto w-full">
         <ul className="space-y-6">
-          {posts.map((post) => (
-            <li key={post.id} className="p-2 bg-[#060309] font-body">
-              <div className="flex flex-col md:flex-row">
-                {post.image && (
-                  <div className="w-full md:w-1/2 h-60">
-                    <Image
-                      src={post.image}
-                      width={400}
-                      height={200}
-                      alt="image"
-                      className="object-cover w-full h-full"
-                    />
+          {!loadingSearch &&
+            posts.map((post) => (
+              <li key={post.id} className="p-2 bg-[#060309] font-body">
+                <div className="flex flex-col md:flex-row">
+                  {post.image && (
+                    <div className="w-full md:w-1/2 h-60">
+                      <Image
+                        src={post.image}
+                        width={400}
+                        height={200}
+                        alt="image"
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  )}
+                  <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">
+                    <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">
+                      {post.title}
+                    </h1>
+                    <h2 className=" max-w-200 wrap-break-word font-medium mb-2">
+                      {post.description}
+                    </h2>
+                    <p className="mb-4 text-gray-700">
+                      {getContentPreview(post.content)}...
+                      <Link
+                        href={`/post/${post.slug}`}
+                        className="text-blue-400 ml-2 hover:underline"
+                      >
+                        ver post
+                      </Link>
+                    </p>
+                    <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
+                      <p className="">{formatDate(post.createdAt)}</p>
+                      <p className="">{post.views} views</p>
+                    </div>
                   </div>
-                )}
-                <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">
-                  <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">{post.title}</h1>
-                  <h2 className=" max-w-200 wrap-break-word font-medium mb-2">{post.description}</h2>
-                  <p className="mb-4 text-gray-700">
-                    {getContentPreview(post.content)}...
-                    <Link
-                      href={`/post/${post.slug}`}
-                      className="text-blue-400 ml-2 hover:underline"
-                    >
-                      ver post
-                    </Link>
-                  </p>
-                 <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
-                   <p className="">
-                    {formatDate(post.createdAt)}
-                  </p>
-                  <p className="">
-                    {post.views} views
-                  </p>
-                 </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
       </div>
       <div className="flex justify-center gap-4 mt-10">

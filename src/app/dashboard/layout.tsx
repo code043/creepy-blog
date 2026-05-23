@@ -14,10 +14,41 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }, [user, loading, router]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <h1 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+          Carregando...
+        </h1>
+      </div>
+    );
   }
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <h1 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+          Redirecionando...
+        </h1>
+      </div>
+    );
+  }
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black">
+        <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+          Carregando...
+        </h2>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <p className="text-white">Verificando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className=" bg-black text-white min-h-screen py-30">

@@ -7,7 +7,7 @@ import { usePaginationSearch } from "@/hooks/usePaginationSearch";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { posts, page, lastPage, search, setSearch, nextPage, prevPage } =
+  const { posts, page, lastPage, search, setSearch, nextPage, prevPage, loadingInitial, loadingSearch } =
     usePaginationSearch();
 
   return (
@@ -23,14 +23,34 @@ export default function Dashboard() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      {posts.length === 0 && (
-        <h2 className="mx-auto text-center text-lg font-bold tracking-tight text">
-          No results found.
-        </h2>
+    
+      {/* INITIAL LOADING */}
+      {loadingInitial && !loadingSearch && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            Carregando todos os posts...
+          </h2>
+        </div>
+      )}
+      {/* SEARCH */}
+      {loadingSearch && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            Buscando...
+          </h2>
+        </div>
+      )}
+      {/* NO RESULTS */}
+      {posts.length === 0 && !loadingSearch && !loadingInitial && (
+        <div className="h-50">
+          <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+            We couldn’t find any results.
+          </h2>
+        </div>
       )}
       <div className="flex justify-center px-4">
         <ul className="grid w-full max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
+          {!loadingSearch && posts.map((post) => (
             <li
               key={post.id}
               className="flex flex-col gap-4 rounded-lg shadow-sm p-5 w-full bg-[#060309]"

@@ -4,7 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Articles() {
-  const { posts } = useLatestPosts();
+  const { posts,loading } = useLatestPosts();
+  if(loading) {
+    return (
+      <div className="flex justify-center">
+        <div className="mx-auto">
+          <p className="text-white">Carregando...</p>
+        </div>
+      </div>
+    )
+  }
   return (
     <div>
       <Link href={"/articles"}>

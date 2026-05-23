@@ -2,14 +2,18 @@
 import { mapPost } from "@/mappers/postMapper";
 import { Post } from "@/types/post";
 import { useState, useEffect } from "react";
+
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export function usePaginationSearch() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const [search, setSearchState] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const [loadingInitial, setLoadingInitial] = useState(true);
+  const [loadingSearch, setLoadingSearch] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 400);
@@ -18,6 +22,12 @@ export function usePaginationSearch() {
 
   useEffect(() => {
     async function loadPosts() {
+      if (debouncedSearch) {
+        setLoadingSearch(true);
+      } else {
+        setLoadingInitial(true);
+      }
+
       try {
         const res = await fetch(
           `${baseURL}/api/posts/all?page=${page}&limit=6&search=${debouncedSearch}`,
@@ -34,6 +44,9 @@ export function usePaginationSearch() {
         setLastPage(last);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoadingInitial(false);
+        setLoadingSearch(false);
       }
     }
 
@@ -45,12 +58,13 @@ export function usePaginationSearch() {
     page,
     lastPage,
     search,
+    loadingInitial,
+    loadingSearch,
     setSearch: (value: string) => {
-      setSearch(value);
+      setSearchState(value);
       setPage(1);
     },
-    setPage,
-    nextPage: () => setPage((p: number) => Math.min(p + 1, lastPage)),
-    prevPage: () => setPage((p: number) => Math.max(p - 1, 1)),
+    nextPage: () => setPage((p) => Math.min(p + 1, lastPage)),
+    prevPage: () => setPage((p) => Math.max(p - 1, 1)),
   };
 }

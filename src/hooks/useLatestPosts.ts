@@ -7,9 +7,11 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export function useLatestPosts(limit: number = 12) {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function load() {
+      setLoading(true)
       try {
         const res = await fetch(`${baseURL}/api/posts/latest?limit=${limit}`);
 
@@ -17,7 +19,9 @@ export function useLatestPosts(limit: number = 12) {
 
         const data = await res.json();
         setPosts(data);
+        setLoading(false)
       } catch (err) {
+        setLoading(false)
         console.error(err);
       }
     }
@@ -25,5 +29,5 @@ export function useLatestPosts(limit: number = 12) {
     load();
   }, [limit]);
 
-  return { posts };
+  return { posts, loading };
 }
