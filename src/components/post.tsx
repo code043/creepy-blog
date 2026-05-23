@@ -21,7 +21,6 @@ export default function Post({ id }: { id: string }) {
     router.push("/dashboard");
   }
 
-  if (loading) return <p className="text-white">Loading...</p>;
   if (!post) return null;
 
   return (
@@ -46,7 +45,13 @@ export default function Post({ id }: { id: string }) {
               {deleting ? "..." : "Deletar"}
             </button>
           </div>
-
+          {loading && (
+            <div className="min-h-10 flex items-center justify-center bg-black">
+              <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+                Carregando...
+              </h2>
+            </div>
+          )}
           {/* TITLE */}
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6 font-body">
             {post.title}
@@ -54,7 +59,7 @@ export default function Post({ id }: { id: string }) {
 
           {/* HERO IMAGE */}
           <div className="relative w-full aspect-video overflow-hidden rounded-md">
-            {post.image && (
+            {!loading && post.image && (
               <Image
                 src={post.image}
                 alt="imagem"
@@ -78,7 +83,10 @@ export default function Post({ id }: { id: string }) {
               switch (block.type) {
                 case "paragraph":
                   return (
-                    <p key={i} className="text-gray-400 text-base md:text-lg leading-relaxed">
+                    <p
+                      key={i}
+                      className="text-gray-400 text-base md:text-lg leading-relaxed"
+                    >
                       {block.value}
                     </p>
                   );

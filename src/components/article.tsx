@@ -36,7 +36,15 @@ export default function Article({ slug }: { slug: string }) {
     };
   }, [post, slug]);
 
-  if (loading) return <p className="text-white">Loading...</p>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+          Carregando...
+        </h2>
+      </div>
+    );
+  }
   if (!post) return <p className="text-white">Not found</p>;
 
   return (
