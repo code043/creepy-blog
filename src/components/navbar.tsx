@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/app/context/auth-content";
 import { Menu } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,7 +10,7 @@ export default function Navbar() {
   const { user, loading } = useAuth();
   const navRef = useRef<HTMLElement>(null);
 
-  // Fecha o menu ao clicar fora do header
+  // click outside
   useEffect(() => {
     if (!open) return;
 
@@ -47,24 +46,24 @@ export default function Navbar() {
           {/* SEARCH */}
 
           {/* DESKTOP NAV */}
-          <nav className="hidden md:block text-[12px] mx-1">
+          <nav className="hidden md:block text-[14px] mx-1 font-bold">
             <ul className="flex space-x-8 items-center">
-              <li className="hover:text-red-500 hover:underline">
+              <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                 <Link href="/">HOME</Link>
               </li>
-              <li className="hover:text-red-500 hover:underline">
+              <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                 <Link href="/articles">POSTS</Link>
               </li>
-              <li className="hover:text-red-500 hover:underline">
+              <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                 <Link href="/about">ABOUT</Link>
               </li>
 
               {user && (
                 <>
-                  <li className="hover:text-red-500 hover:underline">
+                  <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                     <Link href="/dashboard">DASHBOARD</Link>
                   </li>
-                  <li className="hover:text-red-500 hover:underline">
+                  <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                     <Link href="/dashboard/new">NEW</Link>
                   </li>
                 </>

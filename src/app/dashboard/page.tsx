@@ -33,7 +33,7 @@ export default function Dashboard() {
           {posts.map((post) => (
             <li
               key={post.id}
-              className="flex flex-col gap-4 rounded-lg shadow-sm p-5 w-full bg-[#060309] border border-[#f5b461]"
+              className="flex flex-col gap-4 rounded-lg shadow-sm p-5 w-full bg-[#060309]"
             >
               <h2 className="text-lg font-bold tracking-tight text font-body">
                 {post.title}
@@ -50,7 +50,11 @@ export default function Dashboard() {
                 </div>
               )}
 
-              <p className="text-base leading-relaxed font-body">{post.description}</p>
+              <div className="max-w-md overflow-hidden">
+                <p className="text-base leading-relaxed font-body break-words whitespace-normal">
+                  {post.description}
+                </p>
+              </div>
 
               <div className="flex justify-between items-center mt-auto">
                 <Link
@@ -60,7 +64,9 @@ export default function Dashboard() {
                   Ver post
                 </Link>
 
-                <span className="text-sm font-body">{formatDate(post.createdAt)}</span>
+                <span className="text-sm font-body">
+                  {formatDate(post.createdAt)}
+                </span>
               </div>
             </li>
           ))}

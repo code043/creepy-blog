@@ -21,73 +21,86 @@ export default function Post({ id }: { id: string }) {
     router.push("/dashboard");
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="text-white">Loading...</p>;
   if (!post) return null;
-  return (
-    <div className="text-white bg-black px-10">
-      <div className="flex flex-col items-center font-body">
-        <div className="flex justify-center gap-20 py-8">
-        <Link
-          href={"/dashboard/edit/" + id}
-          className="text-center cursor-pointer text-sm font-body font-medium hover:underline  text-blue-500"
-        >
-          Editar
-        </Link>
 
-        <button
-          onClick={handleDelete}
-          disabled={deleting}
-          className="text-center cursor-pointer text-sm font-body font-medium hover:underline text-red-400"
-        >
-          {deleting ? "..." : "Deletar"}
-        </button>
-      </div>
-        <div >
-          <h1 className="max-w-200 text-5xl font-bold tracking-tight leading-tight mb-5">
+  return (
+    <div className="text-white bg-black px-6 md:px-10 overflow-x-hidden">
+      <div className="flex flex-col items-center w-full">
+        {/* CONTAINER PRINCIPAL */}
+        <div className="w-full max-w-4xl">
+          {/* ACTIONS (EDIT / DELETE) */}
+          <div className="flex justify-center gap-10 py-8">
+            <Link
+              href={"/dashboard/edit/" + id}
+              className="text-sm font-medium text-blue-500 hover:underline"
+            >
+              Editar
+            </Link>
+
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-sm font-medium text-red-400 hover:underline"
+            >
+              {deleting ? "..." : "Deletar"}
+            </button>
+          </div>
+
+          {/* TITLE */}
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6 font-body">
             {post.title}
           </h1>
 
-          <div className="w-200 h-125 relative">
+          {/* HERO IMAGE */}
+          <div className="relative w-full aspect-video overflow-hidden rounded-md">
             {post.image && (
               <Image
                 src={post.image}
                 alt="imagem"
-                fill
-                className="object-cover object-top"
+                width={900}
+                height={200}
+                className="w-full h-full object-cover"
               />
             )}
           </div>
-          <div className="text-2xl mt-10 px-3">
-            <h2 className="text-2xl mt-10 px-3">{post.description}</h2>
+
+          {/* DESCRIPTION */}
+          <div className="mt-10">
+            <h2 className="text-xl md:text-2xl px-2 font-body break-words whitespace-normal">
+              {post.description}
+            </h2>
           </div>
 
-          <div className="flex flex-col gap-4 max-w-200 px-3 mt-3 font-body">
+          {/* CONTENT */}
+          <div className="flex flex-col gap-6 mt-6 px-2 font-body">
             {(post.content as ContentBlock[]).map((block: ContentBlock, i) => {
               switch (block.type) {
                 case "paragraph":
                   return (
-                    <div key={i} className="flex justify-center max-w-200">
-                      <p className="px-3 mt-3 indent hyphens-auto">
-                        {block.value}
-                      </p>
-                    </div>
+                    <p key={i} className="text-base md:text-lg leading-relaxed">
+                      {block.value}
+                    </p>
                   );
 
                 case "subtitle":
                   return (
-                    <h2 key={i} className="text-2xl mt-10 px-3">
+                    <h2 key={i} className="text-2xl mt-8 font-bold">
                       {block.value}
                     </h2>
                   );
 
                 case "image":
                   return (
-                    <div key={i} className="mx-auto w-120 h-60 relative ">
+                    <div
+                      key={i}
+                      className="relative w-full h-[300px] overflow-hidden rounded-md"
+                    >
                       <Image
                         src={block.value}
                         alt="imagem"
                         fill
-                        className="object-contain"
+                        className="object-cover"
                       />
                     </div>
                   );
@@ -97,27 +110,31 @@ export default function Post({ id }: { id: string }) {
               }
             })}
           </div>
-           <div className="flex justify-between items-center text-[12px] font-body mt-10 px-3 text-gray-300">
-            <p className="my-8 px-3">{formatDate(post.createdAt)}</p>
+
+          {/* FOOTER INFO */}
+          <div className="flex justify-between items-center text-xs mt-10 px-2 text-gray-400 font-body">
+            <p>{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>
-        </div>
-      </div>
-      <div className="flex justify-center gap-12 py-8">
-        <Link
-          href={"/dashboard/edit/" + id}
-          className="text-center cursor-pointer text-sm font-body font-medium hover:underline  text-blue-500"
-        >
-          Editar
-        </Link>
 
-        <button
-          onClick={handleDelete}
-          disabled={deleting}
-          className="text-center cursor-pointer text-sm font-body font-medium hover:underline text-red-400"
-        >
-          {deleting ? "..." : "Deletar"}
-        </button>
+          {/* ACTIONS BOTTOM */}
+          <div className="flex justify-center gap-10 py-10">
+            <Link
+              href={"/dashboard/edit/" + id}
+              className="text-sm font-medium text-blue-500 hover:underline"
+            >
+              Editar
+            </Link>
+
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-sm font-medium text-red-400 hover:underline"
+            >
+              {deleting ? "..." : "Deletar"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function Footer() {
         </Link>
 
         <p className="text-center max-w-2xl mt-8 text-[15px] font-body">
-          O Creepy Archive é uma coleção continuamente atualizada de relatos
+          O Creepy é uma coleção continuamente atualizada de relatos
           inexplicáveis, registos fragmentados e testemunhos pessoais
           frequentemente sem origem verificada...
         </p>

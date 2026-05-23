@@ -54,9 +54,9 @@ export default function AllArticlesPage() {
                     />
                   </div>
                 )}
-                <div className="w-full md:w-1/2 p-3 flex flex-col bg-white min-h-full">
-                  <h1 className="font-bold mb-2 text-2xl">{post.title}</h1>
-                  <h2 className="font-medium mb-2">{post.description}</h2>
+                <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">
+                  <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">{post.title}</h1>
+                  <h2 className=" max-w-200 wrap-break-word font-medium mb-2">{post.description}</h2>
                   <p className="mb-4 text-gray-700">
                     {getContentPreview(post.content)}...
                     <Link
