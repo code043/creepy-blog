@@ -42,7 +42,7 @@ export default function Article({ slug }: { slug: string }) {
   return (
     <div className="text-white bg-black px-6 md:px-10 overflow-x-hidden">
       <div className="flex justify-center">
-        <div className="w-full max-w-4xl font-body">
+        <div className="w-full max-w-4xl font-body ">
           {/* TITLE */}
           <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">Tittulo</h1>
           {/* HERO IMAGE */}
@@ -81,16 +81,15 @@ export default function Article({ slug }: { slug: string }) {
 
                 case "image":
                   return (
-                    <div
-                      key={i}
-                      className="relative w-full aspect-[4/5] overflow-hidden rounded-md"
-                    >
-                      <Image
-                        src={block.value}
-                        alt="image"
-                        fill
-                        className="object-cover"
-                      />
+                    <div key={i} className="w-full flex justify-center">
+                      <div className="relative w-[350px] h-[250px] overflow-hidden">
+                        <Image
+                          src={block.value}
+                          alt="image"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   );
 

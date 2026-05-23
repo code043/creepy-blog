@@ -30,7 +30,7 @@ export default function Post({ id }: { id: string }) {
         {/* CONTAINER PRINCIPAL */}
         <div className="w-full max-w-4xl">
           {/* ACTIONS (EDIT / DELETE) */}
-          <div className="flex justify-center gap-10 py-8">
+          <div className="flex justify-center gap-25 py-8 font-body">
             <Link
               href={"/dashboard/edit/" + id}
               className="text-sm font-medium text-blue-500 hover:underline"
@@ -118,7 +118,7 @@ export default function Post({ id }: { id: string }) {
           </div>
 
           {/* ACTIONS BOTTOM */}
-          <div className="flex justify-center gap-10 py-10">
+          <div className="flex justify-center gap-25 py-10 font-body">
             <Link
               href={"/dashboard/edit/" + id}
               className="text-sm font-medium text-blue-500 hover:underline"
