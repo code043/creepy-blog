@@ -72,7 +72,7 @@ export default function Post({ id }: { id: string }) {
 
           {/* DESCRIPTION */}
           <div className="mt-10">
-            <h2 className="text-xl md:text-2xl px-2 font-body break-words whitespace-normal">
+            <h2 className="text-xl md:text-2xl font-bold px-2 font-body break-words whitespace-normal">
               {post.description}
             </h2>
           </div>
@@ -93,7 +93,7 @@ export default function Post({ id }: { id: string }) {
 
                 case "subtitle":
                   return (
-                    <h2 key={i} className="text-2xl mt-8 font-bold">
+                    <h2 key={i} className="text-xl md:text-2xl mt-3 font-body text-gray-200">
                       {block.value}
                     </h2>
                   );
@@ -106,7 +106,8 @@ export default function Post({ id }: { id: string }) {
                           src={block.value}
                           alt="image"
                           fill
-                          className="object-cover"
+                          // className="object-cover"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     </div>
