@@ -4,16 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Articles() {
-  const { posts,loading } = useLatestPosts();
-  if(loading) {
-    return (
-      <div className="flex justify-center">
-        <div className="mx-auto">
-          <p className="text-white">Carregando...</p>
-        </div>
-      </div>
-    )
-  }
+  const { posts, loading } = useLatestPosts();
+ 
   return (
     <div>
       <Link href={"/articles"}>
@@ -21,9 +13,14 @@ export default function Articles() {
           Posts
         </h1>
       </Link>
+      {loading && <div className="min-h-10 flex items-center justify-center bg-black">
+        <h2 className="mx-auto text-white text-center text-lg font-bold tracking-tight font-body">
+          Carregando...
+        </h2>
+      </div>}
       <div className="mx-auto">
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
-          {posts.map((post) => {
+          {!loading && posts.map((post) => {
             return (
               <li key={post.id} className="flex flex-col">
                 <div className="overflow-hidden h-50 relative w-full">
