@@ -52,7 +52,7 @@ export default function Article({ slug }: { slug: string }) {
       <div className="flex justify-center">
         <div className="w-full max-w-4xl font-body ">
           {/* TITLE */}
-          <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">Tittulo</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">{post.title}</h1>
           {/* HERO IMAGE */}
           <div className="relative w-full aspect-video overflow-hidden rounded-md">
             {post.image && (
