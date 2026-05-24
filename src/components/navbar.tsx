@@ -55,6 +55,9 @@ export default function Navbar() {
                 <Link href="/articles">POSTS</Link>
               </li>
               <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
+                <Link href="/categories">CATEGORIAS</Link>
+              </li>
+              <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
                 <Link href="/about">ABOUT</Link>
               </li>
 
@@ -107,6 +110,9 @@ export default function Navbar() {
               </Link>
               <Link href="/articles" onClick={() => setOpen(false)}>
                 POSTS
+              </Link>
+               <Link href="/categories" onClick={() => setOpen(false)}>
+                CATEGORIAS
               </Link>
               <Link href="/about" onClick={() => setOpen(false)}>
                 ABOUT

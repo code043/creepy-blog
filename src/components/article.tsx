@@ -5,6 +5,7 @@ import { ContentBlock } from "@/types/blocks";
 import { formatDate } from "@/utils/format";
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -52,7 +53,9 @@ export default function Article({ slug }: { slug: string }) {
       <div className="flex justify-center">
         <div className="w-full max-w-4xl font-body ">
           {/* TITLE */}
-          <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">
+            {post.title}
+          </h1>
           {/* HERO IMAGE */}
           <div className="relative w-full aspect-video overflow-hidden rounded-md">
             {post.image && (
@@ -62,7 +65,6 @@ export default function Article({ slug }: { slug: string }) {
                 width={900}
                 height={200}
                 className="w-full h-full object-cover"
-                 
               />
             )}
           </div>
@@ -88,7 +90,10 @@ export default function Article({ slug }: { slug: string }) {
 
                 case "subtitle":
                   return (
-                    <h2 key={i} className="text-xl md:text-2xl mt-3 font-body text-gray-200">
+                    <h2
+                      key={i}
+                      className="text-xl md:text-2xl mt-3 font-body text-gray-200"
+                    >
                       {block.value}
                     </h2>
                   );
@@ -101,7 +106,6 @@ export default function Article({ slug }: { slug: string }) {
                           src={block.value}
                           alt="image"
                           fill
-                          // className="object-cover"
                           className="w-full h-full object-contain"
                         />
                       </div>
@@ -113,8 +117,16 @@ export default function Article({ slug }: { slug: string }) {
               }
             })}
           </div>
+          {/* CATEGORY */}
+          <div className="mt-5">
+            <span className="text-[15px] md:text-[15px] px-2 font-body text-blue-700 hover:underline">
+              <Link href={"/categories/" + post.category.slug}>
+                {post.category.name}
+              </Link>
+            </span>
+          </div>
           {/* FOOTER INFO */}
-          <div className="flex justify-between items-center text-xs mt-10 px-2 text-gray-400 font-body">
+          <div className="flex justify-between items-center text-xs mt-25 px-2 text-gray-400 font-body">
             <p>{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>

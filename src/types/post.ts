@@ -23,6 +23,7 @@ export type Post = {
   content: ContentBlock[];
   slug: string;
   views: number;
+  category: { id: string; name: string; slug: string };
   createdAt: string;
   updatedAt: string;
 };

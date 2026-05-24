@@ -1,0 +1,46 @@
+"use client";
+
+import { Category } from "@/types/category";
+import { useEffect, useState, useCallback } from "react";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+export function useCategories() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadAllCategories = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const res = await fetch(baseURL + "/api/categories/", {
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        throw new Error("Search categories error!");
+      }
+
+      const data = await res.json();
+      setCategories(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setError(err.message || "Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadAllCategories();
+  }, [loadAllCategories]);
+
+  return {
+    categories,
+    loading,
+    error,
+    reload: loadAllCategories,
+  };
+}

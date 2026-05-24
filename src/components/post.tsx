@@ -93,7 +93,10 @@ export default function Post({ id }: { id: string }) {
 
                 case "subtitle":
                   return (
-                    <h2 key={i} className="text-xl md:text-2xl mt-3 font-body text-gray-200">
+                    <h2
+                      key={i}
+                      className="text-xl md:text-2xl mt-3 font-body text-gray-200"
+                    >
                       {block.value}
                     </h2>
                   );
@@ -118,9 +121,14 @@ export default function Post({ id }: { id: string }) {
               }
             })}
           </div>
-
+          {/* CATEGORY */}
+          <div className="mt-5">
+            <span className="text-[15px] md:text-[15px] px-2 font-body text-blue-700 hover:underline">
+              <Link href={"/categories/"+post.category.slug}>{post.category.name}</Link>
+            </span>
+          </div>
           {/* FOOTER INFO */}
-          <div className="flex justify-between items-center text-xs mt-10 px-2 text-gray-400 font-body">
+          <div className="flex justify-between items-center text-xs mt-25 px-2 text-gray-400 font-body">
             <p>{formatDate(post.createdAt)}</p>
             <p>{post.views} views</p>
           </div>
