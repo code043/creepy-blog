@@ -56,6 +56,13 @@ export default function Article({ slug }: { slug: string }) {
           <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">
             {post.title}
           </h1>
+          {/* SECOND TITLE */}
+          <div className="mt-10 mb-5">
+            <h2 className="text-xl md:text-3xl  px-2 font-body break-words whitespace-normal text-gray-200">
+              {post.description}
+            </h2>
+          </div>
+
           {/* HERO IMAGE */}
           <div className="relative w-full aspect-video overflow-hidden rounded-md">
             {post.image && (
@@ -68,12 +75,7 @@ export default function Article({ slug }: { slug: string }) {
               />
             )}
           </div>
-          {/* DESCRIPTION */}
-          <div className="mt-10">
-            <h2 className="text-xl md:text-2xl font-bold px-2 font-body break-words whitespace-normal">
-              {post.description}
-            </h2>
-          </div>
+         
           {/* CONTENT */}
           <div className="flex flex-col gap-6 mt-5 px-2 font-body">
             {(post.content as ContentBlock[]).map((block, i) => {

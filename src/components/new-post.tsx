@@ -208,15 +208,15 @@ export default function NewPost() {
             required
           />
 
-          {/* Description */}
+          {/* Second title */}
           <label className="text-2xl font-medium" htmlFor="description">
-            Description
+            Second title
           </label>
           <input
             id="description"
             type="text"
             className="w-full border rounded-md px-3 py-2 bg-transparent focus:outline-none focus:ring"
-            placeholder="Your description here..."
+            placeholder="Your second title here..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
