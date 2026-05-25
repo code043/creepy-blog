@@ -2,7 +2,7 @@
 
 import { editPostAction } from "@/actions/edit-post-action";
 import { useAuth } from "@/app/context/auth-content";
-import { useOnePost } from "@/hooks/useOnePost";
+import { useOnePost } from "@/hooks/posts/useOnePost";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

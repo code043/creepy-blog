@@ -1,5 +1,5 @@
 "use client";
-import { useLatestPosts } from "@/hooks/useLatestPosts";
+import { useLatestPosts } from "@/hooks/posts/useLatestPosts";
 import Image from "next/image";
 import Link from "next/link";
 

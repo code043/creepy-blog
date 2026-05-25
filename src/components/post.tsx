@@ -1,7 +1,7 @@
 "use client";
 
-import { useDeletePost } from "@/hooks/useDeletePost";
-import { useOnePost } from "@/hooks/useOnePost";
+import { useDeletePost } from "@/hooks/posts/useDeletePost";
+import { useOnePost } from "@/hooks/posts/useOnePost";
 import { ContentBlock } from "@/types/blocks";
 import { formatDate } from "@/utils/format";
 import Image from "next/image";
@@ -123,9 +123,13 @@ export default function Post({ id }: { id: string }) {
           </div>
           {/* CATEGORY */}
           <div className="mt-5">
-            <span className="text-[15px] md:text-[15px] px-2 font-body text-blue-700 hover:underline">
-              <Link href={"/categories/"+post.category.slug}>{post.category.name}</Link>
-            </span>
+            {post.category && (
+              <span className="text-[15px] md:text-[15px] px-2 font-body text-blue-700 hover:underline">
+                <Link href={"/categories/" + post.category.slug}>
+                  {post.category.name}
+                </Link>
+              </span>
+            )}
           </div>
           {/* FOOTER INFO */}
           <div className="flex justify-between items-center text-xs mt-25 px-2 text-gray-400 font-body">

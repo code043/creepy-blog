@@ -6,17 +6,20 @@ import { useAuth } from "@/app/context/auth-content";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Block, BlockType } from "@/types/blocks";
+import { useCategories } from "@/hooks/categories/useCategories";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function NewPost() {
   const router = useRouter();
+  const { categories } = useCategories();
   const { getAccessToken } = useAuth();
 
   // Filds
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [slug, setSlug] = useState("");
+  const [category, setCategory] = useState("");
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
 
@@ -142,6 +145,7 @@ export default function NewPost() {
         contentJson,
         slug,
         coverUrl,
+        category,
         token,
       );
       if (result?.error) {
@@ -231,7 +235,25 @@ export default function NewPost() {
             onChange={(e) => setSlug(e.target.value)}
             required
           />
-
+          {/* Category */}
+          <label className="text-2xl font-medium" htmlFor="categoria">
+            Categoria
+          </label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full border rounded-md px-3 py-2 bg-transparent"
+          >
+            <option value="">Selecione uma categoria</option>
+            {categories.map((ct) => {
+              return (
+                <option key={ct.id} value={ct.id}>
+                  {ct.name}
+                </option>
+              );
+            })}
+          </select>
+          {/* BLOCKS */}
           {blocks.length === 0 && (
             <p className="text-sm text-gray-500 italic">
               No blocks yet. Click &quot;+ Add block&quot; to start building

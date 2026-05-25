@@ -1,10 +1,10 @@
 "use client";
+
+import { useCategoryPostsBySlug } from "@/hooks/categories/useCategoryPostsBySlug";
+import { ContentBlock } from "@/types/post";
+import { formatDate } from "@/utils/format";
 import Image from "next/image";
 import Link from "next/link";
-import { usePaginationSearch } from "@/hooks/posts/usePaginationSearch";
-import { formatDate } from "@/utils/format";
-
-type ContentBlock = { type: string; value: string };
 
 function getContentPreview(content: unknown, maxLength = 150): string {
   if (typeof content === "string") return content.substring(0, maxLength);
@@ -18,7 +18,7 @@ function getContentPreview(content: unknown, maxLength = 150): string {
   return "";
 }
 
-export default function AllArticlesPage() {
+export default function CategoryPosts({ slug }: { slug: string }) {
   const {
     posts,
     page,
@@ -29,10 +29,11 @@ export default function AllArticlesPage() {
     prevPage,
     loadingInitial,
     loadingSearch,
-  } = usePaginationSearch();
+  } = useCategoryPostsBySlug(slug);
+ 
 
   return (
-    <section className="bg-black px-4 py-30">
+    <section className="bg-black py-10">
       <div className="flex justify-center my-8">
         <input
           autoFocus
@@ -74,15 +75,13 @@ export default function AllArticlesPage() {
                 <div className="flex flex-col md:flex-row">
                   {post.image && (
                     <div className="w-full md:w-1/2 h-60">
-                      <Link href={`/post/${post.slug}`}>
-                        <Image
-                          src={post.image}
-                          width={400}
-                          height={200}
-                          alt="image"
-                          className="object-cover w-full h-full"
-                        />
-                      </Link>
+                      <Link  href={`/post/${post.slug}`} ><Image
+                        src={post.image}
+                        width={400}
+                        height={200}
+                        alt="image"
+                        className="object-cover w-full h-full"
+                      /></Link>
                     </div>
                   )}
                   <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">

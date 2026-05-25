@@ -28,6 +28,7 @@ export async function newPostService(
   content: object,
   slug: string,
   image: string | undefined,
+  category: string,
   token: string,
 ) {
   const res = await fetch(`${baseURL}/api/posts/new`, {
@@ -36,7 +37,7 @@ export async function newPostService(
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, description, content, slug, image }),
+    body: JSON.stringify({ title, description, content, slug, image, categoryId: category}),
   });
 
   const data = await res.json();

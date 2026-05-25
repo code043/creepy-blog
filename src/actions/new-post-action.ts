@@ -8,7 +8,8 @@ export async function newPostAction(
   content: object,
   slug: string,
   image: string | undefined,
+  category: string,
   token: string,
 ) {
-  return await newPostService(title, description, content, slug, image, token);
+  return await newPostService(title, description, content, slug, image, category, token);
 }

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../context/auth-content";
 import { formatDate } from "@/utils/format";
-import { usePaginationSearch } from "@/hooks/usePaginationSearch";
+import { usePaginationSearch } from "@/hooks/posts/usePaginationSearch";
 
 export default function Dashboard() {
   const { user } = useAuth();

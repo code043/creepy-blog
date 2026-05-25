@@ -1,9 +1,9 @@
 "use client";
-import { useCategories } from "@/hooks/useCategories";
+import { useCategories } from "@/hooks/categories/useCategories";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CategoryPage() {
+export default function Categories() {
   const { categories, loading } = useCategories();
   return (
     <section className="bg-black px-4 py-30">
