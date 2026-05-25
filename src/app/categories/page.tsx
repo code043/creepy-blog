@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function Categories() {
   const { categories, loading } = useCategories();
-  console.log(categories)
   return (
     <section className="bg-black px-4 py-30">
       <div className="flex justify-center my-8">

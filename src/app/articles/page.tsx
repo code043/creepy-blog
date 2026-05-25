@@ -101,6 +101,7 @@ export default function AllArticlesPage() {
                         ver post
                       </Link>
                     </p>
+
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
                       <p className="">{formatDate(post.createdAt)}</p>
                       <p className="">{post.views} views</p>
