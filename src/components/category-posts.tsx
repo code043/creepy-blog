@@ -6,7 +6,7 @@ import { formatDate } from "@/utils/format";
 import Image from "next/image";
 import Link from "next/link";
 
-function getContentPreview(content: unknown, maxLength = 150): string {
+function getContentPreview(content: unknown, maxLength = 100): string {
   if (typeof content === "string") return content.substring(0, maxLength);
   if (Array.isArray(content)) {
     const text = (content as ContentBlock[])
@@ -30,8 +30,6 @@ export default function CategoryPosts({ slug }: { slug: string }) {
     loadingInitial,
     loadingSearch,
   } = useCategoryPostsBySlug(slug);
- 
-
   return (
     <section className="bg-black py-10">
       <div className="flex justify-center my-8">
@@ -75,19 +73,26 @@ export default function CategoryPosts({ slug }: { slug: string }) {
                 <div className="flex flex-col md:flex-row">
                   {post.image && (
                     <div className="w-full md:w-1/2 h-60">
-                      <Link  href={`/post/${post.slug}`} ><Image
-                        src={post.image}
-                        width={400}
-                        height={200}
-                        alt="image"
-                        className="object-cover w-full h-full"
-                      /></Link>
+                      <Link href={`/post/${post.slug}`}>
+                        <Image
+                          src={post.image}
+                          width={400}
+                          height={200}
+                          alt="image"
+                          className="object-cover w-full h-full"
+                        />
+                      </Link>
                     </div>
                   )}
                   <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">
-                    <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">
-                      {post.title}
-                    </h1>
+                    <Link
+                      href={`/post/${post.slug}`}
+                      className="hover:underline hover:text-blue-400"
+                    >
+                      <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">
+                        {post.title}
+                      </h1>
+                    </Link>
                     <h2 className=" max-w-200 wrap-break-word font-medium mb-2">
                       {post.description}
                     </h2>

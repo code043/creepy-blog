@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePaginationSearch } from "@/hooks/posts/usePaginationSearch";
 import { formatDate } from "@/utils/format";
+import { useEffect } from "react";
 
 type ContentBlock = { type: string; value: string };
 
-function getContentPreview(content: unknown, maxLength = 150): string {
+function getContentPreview(content: unknown, maxLength = 100): string {
   if (typeof content === "string") return content.substring(0, maxLength);
   if (Array.isArray(content)) {
     const text = (content as ContentBlock[])
@@ -30,6 +31,8 @@ export default function AllArticlesPage() {
     loadingInitial,
     loadingSearch,
   } = usePaginationSearch();
+
+  
 
   return (
     <section className="bg-black px-4 py-30">
@@ -86,9 +89,15 @@ export default function AllArticlesPage() {
                     </div>
                   )}
                   <div className="w-full md:w-1/2 p-3 flex flex-col text-black bg-white min-h-full">
-                    <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">
-                      {post.title}
-                    </h1>
+                    <Link
+                      href={`/post/${post.slug}`}
+                      className="hover:underline hover:text-blue-400"
+                    >
+                      <h1 className=" max-w-200 wrap-break-word font-bold mb-2 text-2xl">
+                        {post.title}
+                      </h1>
+                    </Link>
+
                     <h2 className=" max-w-200 wrap-break-word font-medium mb-2">
                       {post.description}
                     </h2>
@@ -96,12 +105,17 @@ export default function AllArticlesPage() {
                       {getContentPreview(post.content)}...
                       <Link
                         href={`/post/${post.slug}`}
-                        className="text-blue-400 ml-2 hover:underline"
+                        className="text-blue-400 ml-2 hover:underline text-sm"
                       >
                         ver post
                       </Link>
                     </p>
-
+                    {/* category */}
+                    <p className="mb-3 text-[#29dd35] hover:underline">
+                      <Link href={"/categories/" + post.category.slug}>
+                        {post.category.name}
+                      </Link>
+                    </p>
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
                       <p className="">{formatDate(post.createdAt)}</p>
                       <p className="">{post.views} views</p>
