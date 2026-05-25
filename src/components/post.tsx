@@ -53,12 +53,15 @@ export default function Post({ id }: { id: string }) {
             </div>
           )}
           {/* TITLE */}
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6 font-body">
+          <h1 className="text-xl md:text-5xl font-bold mt-10 mb-6 font-body">
             {post.title}
           </h1>
           {/* SECOND TITLE */}
-          <div className="mt-10 mb-5">
-            <h2 className="text-xl md:text-3xl font-bold px-2 font-body break-words whitespace-normal text-gray-200">
+          <div className="mt-3 md:mt-10 mb-5">
+            <h2
+              className="text-sm md:text-3xl  
+	px-1 font-body break-words whitespace-normal text-gray-200"
+            >
               {post.description}
             </h2>
           </div>

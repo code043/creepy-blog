@@ -53,12 +53,15 @@ export default function Article({ slug }: { slug: string }) {
       <div className="flex justify-center">
         <div className="w-full max-w-4xl font-body ">
           {/* TITLE */}
-          <h1 className="text-4xl md:text-5xl font-bold mt-10 mb-6">
+          <h1 className="text-xl md:text-5xl font-bold mt-10 mb-6">
             {post.title}
           </h1>
           {/* SECOND TITLE */}
-          <div className="mt-10 mb-5">
-            <h2 className="text-xl md:text-3xl  px-2 font-body break-words whitespace-normal text-gray-200">
+          <div className="mt-3 md:mt-10 mb-5">
+            <h2
+              className="text-sm md:text-3xl  
+	px-1 font-body break-words whitespace-normal text-gray-200"
+            >
               {post.description}
             </h2>
           </div>
@@ -75,7 +78,7 @@ export default function Article({ slug }: { slug: string }) {
               />
             )}
           </div>
-         
+
           {/* CONTENT */}
           <div className="flex flex-col gap-6 mt-5 px-2 font-body">
             {(post.content as ContentBlock[]).map((block, i) => {
