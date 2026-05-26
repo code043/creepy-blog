@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePaginationSearch } from "@/hooks/posts/usePaginationSearch";
 import { formatDate } from "@/utils/format";
-import { useEffect } from "react";
 
 type ContentBlock = { type: string; value: string };
 
@@ -31,8 +30,6 @@ export default function AllArticlesPage() {
     loadingInitial,
     loadingSearch,
   } = usePaginationSearch();
-
-  
 
   return (
     <section className="bg-black px-4 py-30">
@@ -111,11 +108,13 @@ export default function AllArticlesPage() {
                       </Link>
                     </p>
                     {/* category */}
-                    <p className="mb-3 text-[#29dd35] hover:underline">
-                      <Link href={"/categories/" + post.category.slug}>
-                        {post.category.name}
-                      </Link>
-                    </p>
+                    {post.category && (
+                      <p className="mb-3 text-[#29dd35] hover:underline">
+                        <Link href={"/categories/" + post.category.slug}>
+                          {post.category.name}
+                        </Link>
+                      </p>
+                    )}
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
                       <p className="">{formatDate(post.createdAt)}</p>
                       <p className="">{post.views} views</p>

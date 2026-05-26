@@ -111,7 +111,6 @@ export default function Post({ id }: { id: string }) {
                           src={block.value}
                           alt="image"
                           fill
-                          // className="object-cover"
                           className="w-full h-full object-contain"
                         />
                       </div>
