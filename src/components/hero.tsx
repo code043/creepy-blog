@@ -3,7 +3,7 @@ import heroImg from "../../public/scary-monster-foggy-forest-night.jpg";
 
 export default function Hero() {
   return (
-    <div className="w-full m-10">
+    <div className="w-full py-10">
       <Image
         src={heroImg}
         alt="imagem"
