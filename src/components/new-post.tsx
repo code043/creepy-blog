@@ -112,6 +112,9 @@ export default function NewPost() {
       );
     }
   }
+  function changeBlockCaption(id: number, caption: string) {
+    setBlocks((prev) => prev.map((b) => (b.id === id ? { ...b, caption } : b)));
+  }
 
   // --- Submit ---
   async function handleSubmit(e: React.FormEvent) {
@@ -129,6 +132,7 @@ export default function NewPost() {
     const contentJson = blocks.map((b) => ({
       type: b.type,
       value: typeof b.value === "string" ? b.value : "",
+       caption: b.caption || "",
     }));
 
     try {
@@ -320,6 +324,16 @@ export default function NewPost() {
                         ✓ {block.value}
                       </span>
                     )}
+                    {/* CAPTION */}
+                    <input
+                      type="text"
+                      placeholder="Add a caption..."
+                      value={block.caption || ""}
+                      onChange={(e) =>
+                        changeBlockCaption(block.id, e.target.value)
+                      }
+                      className="text-xs border border-gray-600 rounded px-2 py-1 bg-transparent focus:outline-none"
+                    />
                   </div>
                 ) : block.type === "subtitle" ? (
                   <input

@@ -107,18 +107,26 @@ export default function Article({ slug }: { slug: string }) {
 
                 case "image":
                   return (
-                    <div key={i} className="w-full flex justify-center">
+                    <div
+                      key={i}
+                      className="w-full flex flex-col items-center"
+                    >
                       <div
                         className="relative w-[350px] h-[250px] overflow-hidden cursor-zoom-in"
                         onClick={() => setSelectedImage(block.value)}
                       >
                         <Image
                           src={block.value}
-                          alt="image"
+                          alt={block.caption || "image"}
                           fill
                           className="w-full h-full object-contain"
                         />
                       </div>
+                      {block.caption && (
+                        <span className="text-xs text-gray-400 mt-1 max-w-[350px] break-words whitespace-pre-wrap">
+                          {block.caption}
+                        </span>
+                      )}
                     </div>
                   );
 

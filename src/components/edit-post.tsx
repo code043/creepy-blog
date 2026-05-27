@@ -16,13 +16,13 @@ type Block = {
   value: string | File;
   preview?: string;
   uploading?: boolean;
+   caption?: string; //
 };
 
 export default function EditPost({ id }: { id: string }) {
   const router = useRouter();
   const { getAccessToken } = useAuth();
   const { post, loading } = useOnePost(id);
-  
 
   // Fields
   const [title, setTitle] = useState("");
@@ -48,16 +48,16 @@ export default function EditPost({ id }: { id: string }) {
       setCoverPreview(post.image);
     }
 
-    
     if (Array.isArray(post.content)) {
-      const loaded: Block[] = (post.content as { type: BlockType; value: string }[]).map(
-        (b) => ({
-          id: Date.now() + Math.random(),
-          type: b.type,
-          value: b.value ?? "",
-          preview: b.type === "image" ? b.value : undefined,
-        }),
-      );
+      const loaded: Block[] = (
+        post.content as { type: BlockType; value: string; caption?: string }[]
+      ).map((b) => ({
+        id: Date.now() + Math.random(),
+        type: b.type,
+        value: b.value ?? "",
+        preview: b.type === "image" ? b.value : undefined,
+        caption: b.caption || "",
+      }));
       setBlocks(loaded);
     }
   }, [post]);
@@ -82,7 +82,8 @@ export default function EditPost({ id }: { id: string }) {
   function removeBlock(id: number) {
     setBlocks((prev) => {
       const block = prev.find((b) => b.id === id);
-      if (block?.preview?.startsWith("blob:")) URL.revokeObjectURL(block.preview);
+      if (block?.preview?.startsWith("blob:"))
+        URL.revokeObjectURL(block.preview);
       return prev.filter((b) => b.id !== id);
     });
   }
@@ -99,7 +100,7 @@ export default function EditPost({ id }: { id: string }) {
     setBlocks((prev) => prev.map((b) => (b.id === id ? { ...b, value } : b)));
   }
 
-  // Upload 
+  // Upload
   async function handleBlockImageChange(
     id: number,
     e: React.ChangeEvent<HTMLInputElement>,
@@ -163,6 +164,7 @@ export default function EditPost({ id }: { id: string }) {
     const contentJson = blocks.map((b) => ({
       type: b.type,
       value: typeof b.value === "string" ? b.value : "",
+      caption: b.caption || "",
     }));
 
     try {
@@ -188,7 +190,9 @@ export default function EditPost({ id }: { id: string }) {
   if (loading) {
     return (
       <div className="flex justify-center items-center p-10 text-[#f5b461]">
-        <p className="text-xl font-medium animate-pulse">Loading post data...</p>
+        <p className="text-xl font-medium animate-pulse">
+          Loading post data...
+        </p>
       </div>
     );
   }
@@ -264,11 +268,11 @@ export default function EditPost({ id }: { id: string }) {
           />
 
           {/* Content builder */}
-         
 
           {blocks.length === 0 && (
             <p className="text-sm text-gray-500 italic">
-              No blocks yet. Click &quot;+ Add block&quot; to start building your content.
+              No blocks yet. Click &quot;+ Add block&quot; to start building
+              your content.
             </p>
           )}
 
@@ -279,7 +283,9 @@ export default function EditPost({ id }: { id: string }) {
                 className="border border-gray-700 rounded-md p-3 flex flex-col gap-2"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-400">Block {index + 1}</span>
+                  <span className="text-xs text-gray-400">
+                    Block {index + 1}
+                  </span>
                   <button
                     type="button"
                     onClick={() => removeBlock(block.id)}
@@ -309,25 +315,44 @@ export default function EditPost({ id }: { id: string }) {
                       className="cursor-pointer text-sm"
                       onChange={(e) => handleBlockImageChange(block.id, e)}
                     />
+                    <input
+                      type="text"
+                      placeholder="Add a caption..."
+                      value={block.caption || ""}
+                      onChange={(e) =>
+                        setBlocks((prev) =>
+                          prev.map((b) =>
+                            b.id === block.id
+                              ? { ...b, caption: e.target.value }
+                              : b,
+                          ),
+                        )
+                      }
+                      className="text-xs border border-gray-600 rounded px-2 py-1 bg-transparent"
+                    />
                     {block.uploading && (
                       <span className="text-xs text-yellow-400 animate-pulse">
                         Uploading...
                       </span>
                     )}
                     {/* image preview */}
-                    {(block.preview || typeof block.value === "string" && block.value) && !block.uploading && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={block.preview ?? (block.value as string)}
-                        alt="inline preview"
-                        className="max-h-40 object-contain rounded border border-gray-700"
-                      />
-                    )}
-                    {typeof block.value === "string" && block.value && !block.uploading && (
-                      <span className="text-xs text-green-400 break-all">
-                        ✓ {block.value}
-                      </span>
-                    )}
+                    {(block.preview ||
+                      (typeof block.value === "string" && block.value)) &&
+                      !block.uploading && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={block.preview ?? (block.value as string)}
+                          alt="inline preview"
+                          className="max-h-40 object-contain rounded border border-gray-700"
+                        />
+                      )}
+                    {typeof block.value === "string" &&
+                      block.value &&
+                      !block.uploading && (
+                        <span className="text-xs text-green-400 break-all">
+                          ✓ {block.value}
+                        </span>
+                      )}
                   </div>
                 ) : block.type === "subtitle" ? (
                   <input

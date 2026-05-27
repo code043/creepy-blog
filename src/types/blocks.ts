@@ -6,6 +6,7 @@ type ParagraphBlock = {
 type ImageBlock = {
   type: "image";
   value: string;
+  caption?: string
 };
 
 type SubtitleBlock = {
@@ -13,9 +14,10 @@ type SubtitleBlock = {
   value: string;
 };
 
-export type ContentBlock = ParagraphBlock | ImageBlock | SubtitleBlock;
 
-export type BlockType = "subtitle" | "paragraph" | "image";
+export type ContentBlock = ParagraphBlock | ImageBlock | SubtitleBlock ;
+
+export type BlockType = "subtitle" | "paragraph" | "image" ;
 
 export type Block = {
   id: number;
@@ -26,4 +28,6 @@ export type Block = {
   preview?: string;
 
   uploading?: boolean;
+
+  caption?: string;
 };
