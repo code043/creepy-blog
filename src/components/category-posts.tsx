@@ -23,6 +23,8 @@ export default function CategoryPosts({ slug }: { slug: string }) {
     posts,
     page,
     lastPage,
+    pages,
+    setPage,
     search,
     setSearch,
     nextPage,
@@ -116,25 +118,35 @@ export default function CategoryPosts({ slug }: { slug: string }) {
         </ul>
       </div>
       <div className="flex justify-center gap-4 mt-10">
-        <button
-          onClick={prevPage}
-          disabled={page === 1}
-          className="px-4 py-2 border text-white disabled:opacity-30 hover:text-white cursor-pointer"
-        >
-          ← Anterior
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={prevPage}
+            disabled={page === 1}
+            className="px-4 py-2 border cursor-pointer text-white disabled:opacity-30"
+          >
+            ← Anterior
+          </button>
 
-        <span className="text-white font-body my-auto">
-          Página {page} de {lastPage}
-        </span>
+          {pages.map((p) => (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`px-4 py-2 border font-body cursor-pointer ${
+                p === page ? "bg-white text-black" : "text-white"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
 
-        <button
-          onClick={nextPage}
-          disabled={page === lastPage}
-          className="px-4 py-2 border text-white disabled:opacity-30 hover:text-white cursor-pointer"
-        >
-          Próxima →
-        </button>
+          <button
+            onClick={nextPage}
+            disabled={page === lastPage}
+            className="px-4 py-2 border cursor-pointer text-white disabled:opacity-30"
+          >
+            Próxima →
+          </button>
+        </div>
       </div>
     </section>
   );

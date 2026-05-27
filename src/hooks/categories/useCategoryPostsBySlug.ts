@@ -56,6 +56,8 @@ export function useCategoryPostsBySlug(slug: string) {
     posts,
     page,
     lastPage,
+    pages: Array.from({ length: lastPage }, (_, i) => i + 1),
+    setPage,
     search,
     loadingInitial,
     loadingSearch,

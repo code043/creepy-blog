@@ -57,6 +57,8 @@ export function usePaginationSearch() {
     posts,
     page,
     lastPage,
+    pages: Array.from({ length: lastPage }, (_, i) => i + 1),
+    setPage,
     search,
     loadingInitial,
     loadingSearch,
@@ -66,5 +68,6 @@ export function usePaginationSearch() {
     },
     nextPage: () => setPage((p) => Math.min(p + 1, lastPage)),
     prevPage: () => setPage((p) => Math.max(p - 1, 1)),
+    currentPage: () => setPage((p) => p),
   };
 }

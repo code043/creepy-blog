@@ -23,14 +23,16 @@ export default function AllArticlesPage() {
     posts,
     page,
     lastPage,
+    pages,
+    setPage,
     search,
     setSearch,
     nextPage,
     prevPage,
+    currentPage,
     loadingInitial,
     loadingSearch,
   } = usePaginationSearch();
-
 
   return (
     <section className="bg-black px-4 py-30">
@@ -109,14 +111,18 @@ export default function AllArticlesPage() {
                       </Link>
                     </p>
                     {/* category */}
-                    {post.category && <p className="mb-3 text-[#29dd35] hover:underline">
-                      <Link href={"/categories/" + post.category.slug}>
-                        {post.category.name}
-                      </Link>
-                    </p>}
+                    {post.category && (
+                      <p className="mb-3 text-[#29dd35] hover:underline">
+                        <Link href={"/categories/" + post.category.slug}>
+                          {post.category.name}
+                        </Link>
+                      </p>
+                    )}
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
                       <p className="">{formatDate(post.createdAt)}</p>
-                      <p className="">{post.views} {post.views <= 1 ? 'view' : 'views'}</p>
+                      <p className="">
+                        {post.views} {post.views <= 1 ? "view" : "views"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -125,25 +131,35 @@ export default function AllArticlesPage() {
         </ul>
       </div>
       <div className="flex justify-center gap-4 mt-10">
-        <button
-          onClick={prevPage}
-          disabled={page === 1}
-          className="px-4 py-2 border text-white disabled:opacity-30 hover:text-white cursor-pointer"
-        >
-          ← Anterior
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={prevPage}
+            disabled={page === 1}
+            className="px-4 py-2 border cursor-pointer text-white disabled:opacity-30"
+          >
+            ← Anterior
+          </button>
 
-        <span className="text-white font-body my-auto">
-          Página {page} de {lastPage}
-        </span>
+          {pages.map((p) => (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`px-4 py-2 border font-body cursor-pointer ${
+                p === page ? "bg-white text-black" : "text-white"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
 
-        <button
-          onClick={nextPage}
-          disabled={page === lastPage}
-          className="px-4 py-2 border text-white disabled:opacity-30 hover:text-white cursor-pointer"
-        >
-          Próxima →
-        </button>
+          <button
+            onClick={nextPage}
+            disabled={page === lastPage}
+            className="px-4 py-2 border cursor-pointer text-white disabled:opacity-30"
+          >
+            Próxima →
+          </button>
+        </div>
       </div>
     </section>
   );
