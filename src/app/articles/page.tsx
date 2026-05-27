@@ -116,7 +116,7 @@ export default function AllArticlesPage() {
                     </p>}
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
                       <p className="">{formatDate(post.createdAt)}</p>
-                      <p className="">{post.views} views</p>
+                      <p className="">{post.views} {post.views <= 1 ? 'view' : 'views'}</p>
                     </div>
                   </div>
                 </div>

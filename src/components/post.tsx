@@ -135,7 +135,7 @@ export default function Post({ id }: { id: string }) {
           {/* FOOTER INFO */}
           <div className="flex justify-between items-center text-xs mt-25 px-2 text-gray-400 font-body">
             <p>{formatDate(post.createdAt)}</p>
-            <p>{post.views} views</p>
+            <p>{post.views} {post.views <= 1 ? 'view' : 'views'}</p>
           </div>
 
           {/* ACTIONS BOTTOM */}

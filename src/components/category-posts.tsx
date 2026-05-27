@@ -106,8 +106,8 @@ export default function CategoryPosts({ slug }: { slug: string }) {
                       </Link>
                     </p>
                     <div className="mt-auto flex justify-between text-gray-700 text-[10px]">
-                      <p className="">{formatDate(post.createdAt)}</p>
-                      <p className="">{post.views} views</p>
+                      <p >{formatDate(post.createdAt)}</p>
+                      <p >{post.views} {post.views <= 1 ? 'view' : 'views'}</p>
                     </div>
                   </div>
                 </div>
