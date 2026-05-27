@@ -3,13 +3,14 @@
 import { usePostBySlug } from "@/hooks/posts/usePostBySlug";
 import { ContentBlock } from "@/types/blocks";
 import { formatDate } from "@/utils/format";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Article({ slug }: { slug: string }) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { post, loading } = usePostBySlug(slug);
 
   useEffect(() => {
@@ -67,14 +68,15 @@ export default function Article({ slug }: { slug: string }) {
           </div>
 
           {/* HERO IMAGE */}
-          <div className="relative w-full aspect-video overflow-hidden rounded-md">
+          <div className="relative w-full aspect-video overflow-hidden rounded-md cursor-zoom-in">
             {post.image && (
               <Image
+                onClick={() => setSelectedImage(post.image)}
                 src={post.image}
                 alt="imagem"
                 width={900}
                 height={200}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover "
               />
             )}
           </div>
@@ -106,7 +108,10 @@ export default function Article({ slug }: { slug: string }) {
                 case "image":
                   return (
                     <div key={i} className="w-full flex justify-center">
-                      <div className="relative w-[350px] h-[250px] overflow-hidden">
+                      <div
+                        className="relative w-[350px] h-[250px] overflow-hidden cursor-zoom-in"
+                        onClick={() => setSelectedImage(block.value)}
+                      >
                         <Image
                           src={block.value}
                           alt="image"
@@ -135,10 +140,35 @@ export default function Article({ slug }: { slug: string }) {
           {/* FOOTER INFO */}
           <div className="flex justify-between items-center text-xs mt-25 px-2 text-gray-400 font-body">
             <p>{formatDate(post.createdAt)}</p>
-            <p>{post.views} {post.views <= 1 ? 'view' : 'views'}</p>
+            <p>
+              {post.views} {post.views <= 1 ? "view" : "views"}
+            </p>
           </div>
         </div>
       </div>
+      {selectedImage && (
+        <div
+          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src={selectedImage}
+              alt="preview"
+              fill
+              className="object-contain p-4"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 text-white text-3xl cursor-pointer hover:text-red-500"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
