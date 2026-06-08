@@ -8,9 +8,10 @@ Blog sobre ufologia, criptozoologia e outros mistérios.
 
 ## Live Demo
 
-[🔗 Acessar o Creepy Blog](https://seu-site-aqui.com)
 
-
+<a href="https://creepy-blog.vercel.app/" target="_blank" rel="noopener noreferrer">
+  🔗 Acessar o Creepy Blog
+</a>
 
 ## Getting Started
 
