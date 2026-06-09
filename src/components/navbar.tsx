@@ -58,7 +58,7 @@ export default function Navbar() {
                 <Link href="/categories">CATEGORIAS</Link>
               </li>
               <li className="hover:text-white hover:underline font-imfell text-[16px] drop-shadow-sm">
-                <Link href="/about">ABOUT</Link>
+                <Link href="/about">SOBRE</Link>
               </li>
 
               {user && (
@@ -115,7 +115,7 @@ export default function Navbar() {
                 CATEGORIAS
               </Link>
               <Link href="/about" onClick={() => setOpen(false)}>
-                ABOUT
+                SOBRE
               </Link>
 
               {user && (
