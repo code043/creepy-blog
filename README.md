@@ -1,6 +1,6 @@
 # Creepy Blog
 
-Blog sobre ufologia, criptozoologia e outros mistérios.
+Blog dedicado à exploração de mistérios como ufologia, criptozoologia e fenômenos inexplicáveis.
 
 ![Creepy Blog](./docs/preview.png)
 
