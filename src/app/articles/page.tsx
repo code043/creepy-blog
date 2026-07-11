@@ -17,8 +17,7 @@ function getContentPreview(content: unknown, maxLength = 100): string {
   if (Array.isArray(content)) {
     const text = (content as ContentBlock[])
       .filter(
-        (block) =>
-          block.type === "paragraph" || block.type === "subtitle"
+        (block) => block.type === "paragraph" || block.type === "subtitle",
       )
       .map((block) => block.value)
       .join(" ");
@@ -47,10 +46,12 @@ export default function AllArticlesPage() {
   const articlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    articlesRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    setTimeout(() => {
+      articlesRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   }, [page]);
 
   return (
@@ -129,7 +130,6 @@ export default function AllArticlesPage() {
 
                     <p className="mb-4 text-gray-700">
                       {getContentPreview(post.content)}...
-
                       <Link
                         href={`/post/${post.slug}`}
                         className="ml-2 text-sm text-blue-400 hover:underline"
@@ -194,4 +194,3 @@ export default function AllArticlesPage() {
     </section>
   );
 }
-
