@@ -93,7 +93,7 @@ export default function AllArticlesPage() {
         </div>
       )}
 
-      {/* AQUI COMEÇA O SCROLL */}
+      {/* SCROLL */}
       <div ref={articlesRef} className="max-w-5xl mx-auto w-full">
         <ul className="space-y-6">
           {!loadingSearch &&

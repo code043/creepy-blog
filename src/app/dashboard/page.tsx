@@ -4,11 +4,30 @@ import Link from "next/link";
 import { useAuth } from "../context/auth-content";
 import { formatDate } from "@/utils/format";
 import { usePaginationSearch } from "@/hooks/posts/usePaginationSearch";
+import { useEffect, useRef } from "react";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { posts, page, lastPage, search, setSearch, nextPage, prevPage, loadingInitial, loadingSearch } =
-    usePaginationSearch();
+  const {
+    posts,
+    page,
+    lastPage,
+    search,
+    setSearch,
+    nextPage,
+    prevPage,
+    loadingInitial,
+    loadingSearch,
+  } = usePaginationSearch();
+  const articlesRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    setTimeout(() => {
+      articlesRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  }, [page]);
 
   return (
     <>
@@ -23,7 +42,7 @@ export default function Dashboard() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-    
+
       {/* INITIAL LOADING */}
       {loadingInitial && !loadingSearch && (
         <div className="h-50">
@@ -48,48 +67,49 @@ export default function Dashboard() {
           </h2>
         </div>
       )}
-      <div className="flex justify-center px-4">
+      <div ref={articlesRef} className="flex justify-center px-4">
         <ul className="grid w-full max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {!loadingSearch && posts.map((post) => (
-            <li
-              key={post.id}
-              className="flex flex-col gap-4 rounded-lg shadow-sm p-5 w-full bg-[#060309]"
-            >
-              <h2 className="text-lg font-bold tracking-tight text font-body">
-                {post.title}
-              </h2>
+          {!loadingSearch &&
+            posts.map((post) => (
+              <li
+                key={post.id}
+                className="flex flex-col gap-4 rounded-lg shadow-sm p-5 w-full bg-[#060309]"
+              >
+                <h2 className="text-lg font-bold tracking-tight text font-body">
+                  {post.title}
+                </h2>
 
-              {post.image && (
-                <div className="relative w-full aspect-video overflow-hidden rounded-md">
-                  <Image
-                    src={post.image}
-                    alt="image"
-                    fill
-                    className="object-cover"
-                  />
+                {post.image && (
+                  <div className="relative w-full aspect-video overflow-hidden rounded-md">
+                    <Image
+                      src={post.image}
+                      alt="image"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+
+                <div className="max-w-md overflow-hidden">
+                  <p className="text-base leading-relaxed font-body break-words whitespace-normal">
+                    {post.description}
+                  </p>
                 </div>
-              )}
 
-              <div className="max-w-md overflow-hidden">
-                <p className="text-base leading-relaxed font-body break-words whitespace-normal">
-                  {post.description}
-                </p>
-              </div>
+                <div className="flex justify-between items-center mt-auto">
+                  <Link
+                    href={`/dashboard/post/${post.id}`}
+                    className="bg-[#424e5a] text-white px-4 py-1  text-sm font-medium font-body"
+                  >
+                    Ver post
+                  </Link>
 
-              <div className="flex justify-between items-center mt-auto">
-                <Link
-                  href={`/dashboard/post/${post.id}`}
-                  className="bg-[#424e5a] text-white px-4 py-1  text-sm font-medium font-body"
-                >
-                  Ver post
-                </Link>
-
-                <span className="text-sm font-body">
-                  {formatDate(post.createdAt)}
-                </span>
-              </div>
-            </li>
-          ))}
+                  <span className="text-sm font-body">
+                    {formatDate(post.createdAt)}
+                  </span>
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
       <div className="flex justify-center gap-4 mt-10">
