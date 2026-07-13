@@ -51,7 +51,7 @@ export default function AllArticlesPage() {
         behavior: "smooth",
         block: "start",
       });
-    }, 100);
+    }, 500);
   }, [page]);
 
   return (
